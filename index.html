@@ -13,16 +13,22 @@
 <meta name="theme-color" content="#0D1B3E" />
 <meta name="theme-color" content="#0D1B3E" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0D1B3E" media="(prefers-color-scheme: dark)" />
+<!-- Android navigation bar (bottom system bar) -->
+<meta name="msapplication-navbutton-color" content="#0D1B3E" />
 <!-- iOS Safari status bar -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<style>
+  /* Force bottom bar color on supported Android browsers */
+  :root { color-scheme: dark; }
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Barlow',sans-serif;background:#f0f5ff;color:#1a2340;overflow-x:hidden;line-height:1.6}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden;max-width:100%}
+body{font-family:'Barlow',sans-serif;background:#f0f5ff;color:#1a2340;overflow-x:hidden;line-height:1.6;max-width:100%;position:relative}
 :root{
   --blue:#1565C0;--blue-dark:#0D47A1;--blue-deep:#0a2d6e;
   --cyan:#29B6F6;--cyan-light:#81D4FA;--cyan-dark:#0288D1;
@@ -312,20 +318,62 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
 /* MOBILE */
 @media(max-width:768px){
   /* Navbar stays fixed, hide desktop menu, show hamburger */
-  #navbar{padding:12px 5%;position:fixed!important;top:0;left:0;right:0}
+  #navbar{padding:12px 5%;position:fixed!important;top:0;left:0;right:0;width:100%}
   nav ul{display:none}
   .nav-cta-wrap{display:none}
   .nav-hamburger{display:flex!important}
-  /* Full screen mobile menu */
+  /* Full screen mobile menu — solid dark navy, no transparency */
   nav ul.open{
-    display:flex!important;flex-direction:column;
-    position:fixed;top:0;left:0;right:0;bottom:0;
-    background:var(--bg-dark);z-index:999;
-    justify-content:center;align-items:center;gap:28px;
-    padding-top:80px;
+    display:flex!important;
+    flex-direction:column;
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    width:100%;height:100%;
+    background:#0D1B3E;
+    background-color:#0D1B3E!important;
+    opacity:1!important;
+    z-index:998;
+    justify-content:center;
+    align-items:center;
+    gap:0;
+    padding:0;
+    margin:0;
+    overflow-y:auto;
   }
-  nav ul.open li a{font-size:20px;color:#fff;font-weight:700}
-  nav ul.open li a.nav-cta{background:var(--blue)!important;padding:12px 32px!important;border-radius:8px}
+  nav ul.open li{
+    width:100%;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  nav ul.open li:first-child{
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  nav ul.open li a{
+    display:block;
+    padding:18px 24px;
+    font-size:17px;
+    color:#ffffff!important;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    transition:background .2s, color .2s;
+  }
+  nav ul.open li a:hover{
+    background:rgba(41,182,246,0.12);
+    color:var(--cyan)!important;
+  }
+  nav ul.open li a.nav-cta{
+    background:var(--blue)!important;
+    color:#fff!important;
+    margin:20px 24px;
+    border-radius:8px;
+    padding:14px 24px!important;
+    display:block;
+    width:calc(100% - 48px);
+    font-size:15px;
+    font-weight:700;
+    text-align:center;
+  }
   /* Push content below fixed header */
   #hero{padding-top:72px}
   .hero-wrapper{grid-template-columns:1fr}
@@ -345,6 +393,10 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
   .legal-modal{padding:28px 20px}
   .section-title{font-size:2rem}
   .nav-logo img{height:36px}
+  /* Prevent any element from causing horizontal overflow */
+  section,.section-inner,.hero-wrapper,.footer-inner{max-width:100%;overflow-x:hidden}
+  .map-visual{width:280px;height:280px}
+  .clients-ticker-wrap{max-width:100vw}
 }
 </style>
 </head>
@@ -362,6 +414,16 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
   </a>
   <nav>
     <ul id="nav-menu">
+      <!-- Mobile menu top bar with close button -->
+      <li class="mobile-menu-header" style="display:none;width:100%;border-bottom:2px solid rgba(41,182,246,0.2)!important;padding:0!important;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 24px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff;">RNEx</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);">Consultancy</span>
+          </div>
+          <button onclick="toggleMenu()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:22px;width:40px;height:40px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">&#10005;</button>
+        </div>
+      </li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#pricing">Pricing</a></li>
@@ -1053,15 +1115,21 @@ window.addEventListener('scroll',function(){
 function toggleMenu(){
   var menu=document.getElementById('nav-menu');
   var burger=document.getElementById('hamburger');
-  menu.classList.toggle('open');
+  var mobileHeader=document.querySelector('.mobile-menu-header');
+  var isOpen=menu.classList.toggle('open');
   burger.classList.toggle('open');
-  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+  document.body.style.overflow=isOpen?'hidden':'';
+  if(mobileHeader){mobileHeader.style.display=isOpen?'block':'none';}
 }
 document.querySelectorAll('#nav-menu a').forEach(function(a){
   a.addEventListener('click',function(){
-    document.getElementById('nav-menu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
+    var menu=document.getElementById('nav-menu');
+    var burger=document.getElementById('hamburger');
+    var mobileHeader=document.querySelector('.mobile-menu-header');
+    menu.classList.remove('open');
+    burger.classList.remove('open');
     document.body.style.overflow='';
+    if(mobileHeader){mobileHeader.style.display='none';}
   });
 });
 

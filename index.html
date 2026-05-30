@@ -141,27 +141,45 @@ section{padding:100px 0}
 .service-card p{color:var(--text-soft);font-size:14px;line-height:1.7;margin-bottom:14px}
 .service-note{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
 
-/* PRICING */
+/* PRICING SECTION */
 #pricing{background:var(--bg-dark)}
 #pricing .section-title{color:#fff}
 #pricing .section-label{color:var(--cyan)}
-.pricing-header{text-align:center;margin-bottom:16px}
+.pricing-header{text-align:center;margin-bottom:40px}
 .pricing-header .section-sub{color:rgba(255,255,255,.55);margin:0 auto}
-.onboarding-note{background:rgba(41,182,246,.1);border:1px solid rgba(41,182,246,.25);border-radius:8px;padding:14px 24px;text-align:center;color:rgba(255,255,255,.7);font-size:14px;margin-bottom:40px}
-.onboarding-note strong{color:var(--cyan)}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.price-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px 26px;position:relative;transition:all .3s}
-.price-card:hover{background:rgba(255,255,255,.07);border-color:rgba(41,182,246,.3)}
-.price-card.featured{background:linear-gradient(145deg,rgba(21,101,192,.35),rgba(41,182,246,.15));border-color:var(--cyan);transform:scale(1.03)}
-.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--bg-dark);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 14px;border-radius:100px}
-.price-tier{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--cyan);margin-bottom:6px}
-.price-card h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:14px}
-.price-amount{font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);margin-bottom:6px}
-.price-amount span{font-size:14px;font-weight:400;color:rgba(255,255,255,.4)}
-.price-desc{color:rgba(255,255,255,.5);font-size:13px;margin-bottom:22px}
-.price-features{list-style:none;display:flex;flex-direction:column;gap:10px}
-.price-features li{color:rgba(255,255,255,.75);font-size:14px;padding-left:20px;position:relative}
-.price-features li::before{content:'✓';position:absolute;left:0;color:var(--cyan);font-weight:700;font-size:12px}
+
+/* PRICING TABLE */
+.pricing-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid rgba(255,255,255,0.12);}
+.pricing-table{width:100%;min-width:600px;border-collapse:collapse;}
+.pt-row{display:grid;grid-template-columns:1.6fr 1fr 1.1fr 1fr;}
+.pt-row:not(.pt-head):not(.pt-last){border-bottom:1px solid rgba(255,255,255,0.07);}
+.pt-cell{padding:14px 18px;font-size:13px;color:rgba(255,255,255,0.7);display:flex;align-items:center;line-height:1.5;}
+.pt-head .pt-cell{padding:12px 18px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.04);}
+.pt-head .pt-tier{color:var(--cyan);font-size:12px;justify-content:center;text-align:center;}
+.pt-head .pt-featured{background:rgba(41,182,246,0.12);color:var(--cyan);}
+.pt-label{color:rgba(255,255,255,0.55);font-weight:600;font-size:13px;}
+.pt-featured{background:rgba(41,182,246,0.07);border-left:1px solid rgba(41,182,246,0.2);border-right:1px solid rgba(41,182,246,0.2);}
+.pt-head .pt-featured{border-radius:8px 8px 0 0;}
+.pt-last .pt-featured{border-radius:0 0 8px 8px;}
+.pt-yes{color:#4ade80;font-weight:800;margin-right:5px;font-size:14px;}
+.pt-no{color:#f87171;font-weight:800;margin-right:5px;font-size:14px;}
+.pt-row:not(.pt-head) .pt-cell:not(.pt-label){justify-content:center;text-align:center;}
+.pt-row:hover:not(.pt-head){background:rgba(255,255,255,0.02);}
+
+/* PRICING CARDS — remove old onboarding note, keep cards clean */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.price-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px 26px;position:relative;transition:all .3s;}
+.price-card:hover{background:rgba(255,255,255,.07);border-color:rgba(41,182,246,.3);}
+.price-card.featured{background:linear-gradient(145deg,rgba(21,101,192,.35),rgba(41,182,246,.15));border-color:var(--cyan);transform:scale(1.03);}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--bg-dark);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 14px;border-radius:100px;}
+.price-tier{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--cyan);margin-bottom:6px;}
+.price-card h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:14px;}
+.price-amount{font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);margin-bottom:6px;}
+.price-amount span{font-size:14px;font-weight:400;color:rgba(255,255,255,.4);}
+.price-desc{color:rgba(255,255,255,.5);font-size:13px;margin-bottom:22px;}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.price-features li{color:rgba(255,255,255,.75);font-size:14px;padding-left:20px;position:relative;}
+.price-features li::before{content:'✓';position:absolute;left:0;color:var(--cyan);font-weight:700;font-size:12px;}
 
 /* TEAM */
 #team{background:var(--bg-white)}
@@ -310,44 +328,75 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
 
 /* FLOATING CALL & WHATSAPP BUTTONS */
 .floating-btns{
-  position:fixed;bottom:28px;right:20px;
-  display:flex;flex-direction:column;gap:12px;
-  z-index:900;align-items:flex-end;
+  position:fixed !important;
+  bottom:24px !important;
+  right:16px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:14px !important;
+  z-index:9999 !important;
+  align-items:center !important;
+  pointer-events:all !important;
 }
 .float-btn{
-  display:flex;align-items:center;gap:10px;
-  padding:0 18px 0 0;height:52px;border-radius:100px;
-  text-decoration:none;font-weight:700;font-size:13px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.25);
-  transition:all 0.3s;cursor:pointer;
-  overflow:hidden;white-space:nowrap;
+  width:56px !important;
+  height:56px !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-decoration:none !important;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3) !important;
+  transition:transform 0.2s, box-shadow 0.2s !important;
+  cursor:pointer !important;
+  border:none !important;
+  flex-shrink:0 !important;
 }
-.float-btn:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.3);}
-.float-btn-icon{
-  width:52px;height:52px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:22px;
+.float-btn:hover,.float-btn:active{
+  transform:scale(1.12) !important;
+  box-shadow:0 6px 24px rgba(0,0,0,0.4) !important;
 }
-.float-btn-label{
-  font-size:13px;font-weight:700;letter-spacing:0.02em;
-  max-width:0;overflow:hidden;opacity:0;
-  transition:max-width 0.4s ease,opacity 0.3s ease,padding 0.3s ease;
+.float-btn svg{
+  width:28px !important;
+  height:28px !important;
+  fill:#fff !important;
+  flex-shrink:0 !important;
 }
-.float-btn:hover .float-btn-label{
-  max-width:120px;opacity:1;padding-left:2px;
+.float-wa{
+  background:#25D366 !important;
+  animation:float-pulse-wa 2.5s infinite !important;
 }
-/* WhatsApp green */
-.float-wa{background:#25D366;color:#fff;}
-.float-wa .float-btn-icon{background:#20b858;}
-/* Call blue */
-.float-call{background:var(--blue);color:#fff;}
-.float-call .float-btn-icon{background:var(--blue-dark);}
-/* Pulse animation on WhatsApp */
-.float-wa{animation:float-pulse 3s infinite;}
-@keyframes float-pulse{
-  0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4);}
-  50%{box-shadow:0 4px 32px rgba(37,211,102,0.7),0 0 0 8px rgba(37,211,102,0.1);}
+.float-call{
+  background:#1565C0 !important;
+  animation:float-pulse-call 2.5s infinite !important;
+  animation-delay:1.25s !important;
 }
+@keyframes float-pulse-wa{
+  0%,100%{box-shadow:0 4px 16px rgba(37,211,102,0.5);}
+  50%{box-shadow:0 4px 24px rgba(37,211,102,0.8),0 0 0 10px rgba(37,211,102,0.12);}
+}
+@keyframes float-pulse-call{
+  0%,100%{box-shadow:0 4px 16px rgba(21,101,192,0.5);}
+  50%{box-shadow:0 4px 24px rgba(21,101,192,0.8),0 0 0 10px rgba(21,101,192,0.12);}
+}
+/* Tooltip labels */
+.float-btn::before{
+  content:attr(data-label);
+  position:absolute;
+  right:68px;
+  background:rgba(0,0,0,0.75);
+  color:#fff;
+  font-size:12px;
+  font-weight:600;
+  padding:5px 10px;
+  border-radius:6px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.2s;
+  font-family:'Barlow',sans-serif;
+}
+.float-btn:hover::before{opacity:1;}
 .fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 .fade-up.d1{transition-delay:.1s}
@@ -429,6 +478,9 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
   .services-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr}
   .price-card.featured{transform:none}
+  .pt-row{grid-template-columns:1.4fr 1fr 1fr 1fr;}
+  .pt-cell{padding:10px 10px;font-size:11px;}
+  .pt-head .pt-cell{font-size:10px;}
   .ba-models{grid-template-columns:1fr}
   .ba-phases{grid-template-columns:repeat(2,1fr)}
   .footer-top{grid-template-columns:1fr}
@@ -650,51 +702,121 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
       <h2 class="section-title">Transparent, Flexible Pricing</h2>
       <p class="section-sub">Choose the engagement that matches your growth stage.</p>
     </div>
-    <div class="onboarding-note fade-up">
-      All engagements begin with a <strong>one-time non-refundable onboarding fee of INR 10,000</strong> at agreement signing.
-    </div>
-    <div class="pricing-grid">
-      <div class="price-card fade-up d1">
+
+    <!-- 3 Cards -->
+    <div class="pricing-grid fade-up" style="margin-bottom:48px;">
+      <div class="price-card">
         <div class="price-tier">Starter</div>
         <h3>Market Entry</h3>
-        <div class="price-amount">&#8377;10K&#8211;25K <span>/ month</span></div>
+        <div class="price-amount">&#8377;15K&#8211;25K <span>/ month</span></div>
         <p class="price-desc">Test the market before scaling up</p>
         <ul class="price-features">
+          <li>Onboarding fee: &#8377;10,000 (one-time)</li>
           <li>Access to 1&#8211;2 apartment complexes</li>
-          <li>1 facilitated community interaction/month</li>
-          <li>Monthly activity report</li>
-          <li>Basic community introduction</li>
+          <li>1 structured interaction/month</li>
+          <li>Revenue sharing as per agreement</li>
+          <li>Same complex exclusivity only</li>
+          <li>AOA/Society charges additional</li>
         </ul>
       </div>
-      <div class="price-card featured fade-up d2">
+      <div class="price-card featured">
         <div class="price-badge">Most Popular</div>
         <div class="price-tier">Growth</div>
         <h3>Active Expansion</h3>
-        <div class="price-amount">&#8377;25K&#8211;60K <span>/ month</span></div>
-        <p class="price-desc">Multi-apartment reach with active outreach</p>
+        <div class="price-amount">&#8377;25K&#8211;40K <span>/ month</span></div>
+        <p class="price-desc">Multi-complex reach with managed outreach</p>
         <ul class="price-features">
-          <li>Multi-apartment complex access</li>
-          <li>Managed calling &amp; lead generation</li>
-          <li>Targeted community campaigns</li>
-          <li>Monthly performance review</li>
-          <li>Revenue sharing structure available</li>
-          <li>Event facilitation support</li>
+          <li>Onboarding fee: &#8377;10,000 (one-time)</li>
+          <li>Multi-complex access (selected)</li>
+          <li>Multiple interactions/month</li>
+          <li>Managed outreach included</li>
+          <li>Revenue sharing as per agreement</li>
+          <li>AOA/Society charges additional</li>
         </ul>
       </div>
-      <div class="price-card fade-up d3">
+      <div class="price-card">
         <div class="price-tier">Premium</div>
         <h3>Full Presence</h3>
-        <div class="price-amount">&#8377;60K&#8211;1L <span>/ month</span></div>
+        <div class="price-amount">&#8377;60K+ <span>/ month</span></div>
         <p class="price-desc">Deep, sustained community market presence</p>
         <ul class="price-features">
+          <li>Onboarding fee: &#8377;10,000 (one-time)</li>
           <li>Full locality engagement</li>
-          <li>Dedicated campaigns &amp; co-branding</li>
-          <li>Priority association event access</li>
-          <li>Senior advisory involvement</li>
-          <li>Revenue sharing + equity (selective)</li>
-          <li>Directory ad placement included</li>
+          <li>Priority event access + dedicated campaigns</li>
+          <li>Managed outreach + co-branding</li>
+          <li>Rev share + equity (selective)</li>
+          <li>AOA/Society charges additional</li>
         </ul>
       </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="pricing-table-wrap fade-up">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:16px;text-align:center;">Full Feature Comparison</div>
+      <div class="pricing-table">
+        <!-- Header -->
+        <div class="pt-row pt-head">
+          <div class="pt-cell pt-label"></div>
+          <div class="pt-cell pt-tier">Starter</div>
+          <div class="pt-cell pt-tier pt-featured">Growth</div>
+          <div class="pt-cell pt-tier">Premium</div>
+        </div>
+        <!-- Rows -->
+        <div class="pt-row">
+          <div class="pt-cell pt-label">One-Time Onboarding Fee</div>
+          <div class="pt-cell">&#8377;10,000</div>
+          <div class="pt-cell pt-featured">&#8377;10,000</div>
+          <div class="pt-cell">&#8377;10,000</div>
+        </div>
+        <div class="pt-row">
+          <div class="pt-cell pt-label">Monthly Retainer</div>
+          <div class="pt-cell">&#8377;15,000&#8211;25,000</div>
+          <div class="pt-cell pt-featured">&#8377;25,000&#8211;40,000</div>
+          <div class="pt-cell">&#8377;60,000+</div>
+        </div>
+        <div class="pt-row">
+          <div class="pt-cell pt-label">Apartment Access</div>
+          <div class="pt-cell">1&#8211;2 complexes</div>
+          <div class="pt-cell pt-featured">Multi-complex (selected)</div>
+          <div class="pt-cell">Full locality engagement</div>
+        </div>
+        <div class="pt-row">
+          <div class="pt-cell pt-label">Interactions / Month</div>
+          <div class="pt-cell">1 structured interaction</div>
+          <div class="pt-cell pt-featured">Multiple interactions</div>
+          <div class="pt-cell">Priority event access</div>
+        </div>
+        <div class="pt-row">
+          <div class="pt-cell pt-label">Managed Outreach</div>
+          <div class="pt-cell"><span class="pt-no">✗</span> Not included</div>
+          <div class="pt-cell pt-featured"><span class="pt-yes">✓</span> Included</div>
+          <div class="pt-cell"><span class="pt-yes">✓</span> Dedicated campaigns</div>
+        </div>
+        <div class="pt-row">
+          <div class="pt-cell pt-label">Revenue Sharing</div>
+          <div class="pt-cell"><span class="pt-yes">✓</span> As per agreement</div>
+          <div class="pt-cell pt-featured"><span class="pt-yes">✓</span> As per agreement</div>
+          <div class="pt-cell"><span class="pt-yes">✓</span> Rev share + equity (selective)</div>
+        </div>
+        <div class="pt-row">
+          <div class="pt-cell pt-label">Exclusivity</div>
+          <div class="pt-cell">Same complex only</div>
+          <div class="pt-cell pt-featured">Selected complexes</div>
+          <div class="pt-cell">Separately agreed</div>
+        </div>
+        <div class="pt-row pt-last">
+          <div class="pt-cell pt-label">AOA / Society Charges</div>
+          <div class="pt-cell">Additional — on actual</div>
+          <div class="pt-cell pt-featured">Additional — on actual</div>
+          <div class="pt-cell">Additional — on actual</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:36px;" class="fade-up">
+      <a href="#contact" class="btn-primary" style="display:inline-flex;">
+        Get Started Today &#8594;
+      </a>
     </div>
   </div>
 </section>
@@ -1153,23 +1275,21 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
   <!-- WhatsApp -->
   <a class="float-btn float-wa"
      href="https://wa.me/919015095151?text=Hi%2C%20I%20found%20your%20number%20through%20your%20website%20(rnexconsultancy.com).%20I%20am%20interested%20in%20knowing%20more%20about%20RNEx%20Consultancy%20services.%20Could%20you%20please%20help%20me%3F"
-     target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <div class="float-btn-icon">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-    </div>
-    <span class="float-btn-label">WhatsApp Us</span>
+     target="_blank" rel="noopener"
+     data-label="WhatsApp Us"
+     aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
   </a>
   <!-- Call -->
   <a class="float-btn float-call"
-     href="tel:+919015095151" aria-label="Call us">
-    <div class="float-btn-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-      </svg>
-    </div>
-    <span class="float-btn-label">Call Us</span>
+     href="tel:+919015095151"
+     data-label="Call Us Now"
+     aria-label="Call RNEx Consultancy">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </svg>
   </a>
 </div>
 

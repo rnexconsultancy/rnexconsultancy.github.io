@@ -1594,10 +1594,7 @@ async function startSubscription(tier) {
   var tierName = RNEX_CONFIG.tierNames[tier];
   var inp = parseFloat(document.getElementById('sub-'+tier+'-amt').value);
   if (!inp||inp<1){alert('Please enter your agreed monthly retainer amount first.');return;}
-  var ranges={starter:[15000,25000],growth:[25000,40000],premium:[60000,999999]};
-  if(ranges[tier]&&(inp<ranges[tier][0]||inp>ranges[tier][1])){
-    alert('Amount ₹'+inp.toLocaleString('en-IN')+' is outside the '+tierName+' range.');return;
-  }
+  // No range restriction — any agreed amount accepted
   var email=prompt('Please enter your email address:');
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
   var name=prompt('Your full name:')||email;

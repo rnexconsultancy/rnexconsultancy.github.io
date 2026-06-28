@@ -436,6 +436,90 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
 .pay-cancel-note{margin-top:24px;padding:14px 20px;background:var(--bg-light);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text-soft);line-height:1.6;}
 .pay-cancel-note a{color:var(--blue);font-weight:600;text-decoration:none;}
 
+/* PRICING TIER TABS */
+.tier-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;margin-bottom:28px;}
+.tier-tab{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 12px;background:transparent;border:none;cursor:pointer;transition:all .25s;position:relative;border-right:1px solid rgba(255,255,255,.08);}
+.tier-tab:last-child{border-right:none;}
+.tier-tab.active{background:linear-gradient(135deg,rgba(21,101,192,.4),rgba(41,182,246,.2));border-bottom:3px solid var(--cyan);}
+.tier-tab:hover:not(.active){background:rgba(255,255,255,.05);}
+.tier-tab-badge{position:absolute;top:8px;right:8px;background:var(--cyan);color:var(--bg-dark);font-size:9px;font-weight:800;padding:2px 7px;border-radius:100px;text-transform:uppercase;letter-spacing:.05em;}
+.tier-tab-icon{font-size:1.4rem;}
+.tier-tab-name{color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;}
+.tier-tab-price{color:var(--cyan);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;}
+
+/* TIER CONTENT CARDS */
+.tier-content{animation:fadein .3s ease;}
+.tier-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;margin-bottom:32px;}
+.tier-card-growth{background:linear-gradient(135deg,rgba(21,101,192,.3),rgba(41,182,246,.15));border-color:var(--cyan);position:relative;}
+.tier-card-pop-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--bg-dark);font-size:11px;font-weight:800;padding:4px 18px;border-radius:0 0 10px 10px;letter-spacing:.06em;}
+.tier-card-left{padding:36px 32px;border-right:1px solid rgba(255,255,255,.08);}
+.tier-card-right{padding:36px 32px;}
+.tier-card-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--cyan);margin-bottom:8px;}
+.tier-card-title{font-family:'Barlow Condensed',sans-serif;font-size:2.4rem;font-weight:800;color:#fff;margin-bottom:12px;line-height:1;}
+.tier-card-amount{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:800;color:#fff;margin-bottom:14px;}
+.tier-card-amount span{font-size:1.2rem;color:rgba(255,255,255,.5);}
+.tier-card-amount small{font-size:14px;font-weight:400;color:rgba(255,255,255,.4);}
+.tier-card-desc{color:rgba(255,255,255,.55);font-size:14px;line-height:1.7;margin-bottom:20px;}
+.tier-card-note{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;}
+.tier-card-cta{display:inline-block;background:var(--blue);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;transition:all .2s;}
+.tier-card-cta:hover{background:var(--blue-dark);transform:translateY(-2px);}
+.tier-features-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:16px;}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.tier-features li{font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.tf-yes{color:#4ade80;font-weight:800;flex-shrink:0;}
+.tf-no{color:#f87171;font-weight:800;flex-shrink:0;}
+.tf-note{color:var(--cyan);font-weight:800;flex-shrink:0;}
+
+/* PAYMENT PILL TABS */
+.pay-pill-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:28px;}
+.pay-pill{padding:16px 20px;background:var(--bg-light);border:none;font-family:'Barlow',sans-serif;font-size:15px;font-weight:700;color:var(--text-soft);cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;border-right:2px solid var(--border);}
+.pay-pill:last-child{border-right:none;}
+.pay-pill.active{background:var(--blue);color:#fff;}
+.pay-pill:hover:not(.active){background:rgba(21,101,192,.06);color:var(--blue);}
+
+/* PAYMENT PANEL */
+.pay-panel{animation:fadein .3s ease;}
+.pay-panel-note{background:linear-gradient(135deg,rgba(21,101,192,.06),rgba(41,182,246,.06));border:1px solid var(--border);border-radius:10px;padding:12px 18px;font-size:13px;color:var(--blue);font-weight:600;margin-bottom:20px;text-align:center;}
+
+/* PAY TIER PILLS inside payment */
+.pay-tier-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.pay-tier-pill{padding:10px 8px;background:var(--bg-light);border:2px solid var(--border);border-radius:10px;font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;}
+.pay-tier-pill.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.pay-tier-pill:hover:not(.active){border-color:var(--blue);color:var(--blue);}
+
+/* PAY TIER CONTENT CARD */
+.pay-tier-content{animation:fadein .3s ease;}
+.pay-tier-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--bg-light);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px;position:relative;}
+.pay-tier-card-featured{background:linear-gradient(135deg,rgba(21,101,192,.08),rgba(41,182,246,.06));border-color:var(--blue);}
+.ptc-pop{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:800;padding:4px 16px;border-radius:0 0 8px 8px;letter-spacing:.06em;white-space:nowrap;}
+.ptc-left{padding:28px 24px;border-right:1px solid var(--border);}
+.ptc-right{padding:28px 24px;display:flex;flex-direction:column;justify-content:center;gap:12px;}
+.ptc-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:6px;}
+.ptc-amount{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:800;color:var(--charcoal);line-height:1;margin-bottom:8px;}
+.ptc-amount span{font-size:13px;font-weight:400;color:var(--text-muted);}
+.ptc-desc{font-size:13px;color:var(--text-soft);line-height:1.6;}
+.ptc-input-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);}
+.ptc-input-wrap{display:flex;align-items:center;gap:8px;background:var(--bg-white);border:1.5px solid var(--border);border-radius:8px;padding:4px 12px;transition:border-color .2s;}
+.ptc-input-wrap:focus-within{border-color:var(--blue);}
+.ptc-rupee{font-size:18px;font-weight:800;color:var(--blue);flex-shrink:0;}
+.ptc-input-wrap input{flex:1;border:none;outline:none;background:transparent;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:700;color:var(--charcoal);padding:8px 0;}
+.ptc-btn{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.ptc-btn:hover{background:var(--blue-dark);transform:translateY(-1px);}
+
+/* ONE-TIME PAYMENT CARDS */
+.pay-onetime-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.pay-ot-card{background:var(--bg-light);border:1px solid var(--border);border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;gap:10px;transition:all .3s;}
+.pay-ot-card:hover{box-shadow:0 8px 28px rgba(21,101,192,.1);transform:translateY(-3px);}
+.pay-ot-custom{border-style:dashed;border-color:var(--blue);}
+.pay-ot-icon{font-size:2rem;}
+.pay-ot-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);}
+.pay-ot-amount{font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:800;color:var(--charcoal);line-height:1;}
+.pay-ot-desc{font-size:13px;color:var(--text-muted);line-height:1.6;flex:1;}
+.pay-ot-btn{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:4px;}
+.pay-ot-btn:hover{background:var(--blue-dark);transform:translateY(-1px);}
+.pay-ot-btn-green{background:#2e7d32;}
+.pay-ot-btn-green:hover{background:#1b5e20;}
+
 /* THANK YOU MODAL */
 .ty-modal-overlay{display:none;position:fixed;inset:0;z-index:3000;background:rgba(13,27,62,.92);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;}
 .ty-modal-overlay.open{display:flex;}
@@ -572,6 +656,14 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
   .pt-cell{padding:10px 10px;font-size:11px;}
   .pt-head .pt-cell{font-size:10px;}
   .pay-grid{grid-template-columns:1fr;}
+  .tier-card{grid-template-columns:1fr;}
+  .tier-card-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);}
+  .pay-tier-card{grid-template-columns:1fr;}
+  .ptc-left{border-right:none;border-bottom:1px solid var(--border);}
+  .pay-onetime-grid{grid-template-columns:1fr;}
+  .pay-pill{font-size:13px;padding:14px 12px;}
+  .tier-tabs{grid-template-columns:repeat(3,1fr);}
+  .tier-tab-price{font-size:13px;}
   .ba-models{grid-template-columns:1fr}
   .ba-phases{grid-template-columns:repeat(2,1fr)}
   .footer-top{grid-template-columns:1fr}
@@ -795,50 +887,100 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
       <p class="section-sub">Choose the engagement that matches your growth stage.</p>
     </div>
 
-    <!-- 3 Cards -->
-    <div class="pricing-grid fade-up" style="margin-bottom:48px;">
-      <div class="price-card">
-        <div class="price-tier">Starter</div>
-        <h3>Market Entry</h3>
-        <div class="price-amount">&#8377;15K&#8211;25K <span>/ month</span></div>
-        <p class="price-desc">Test the market before scaling up</p>
-        <ul class="price-features">
-          <li>Onboarding fee: &#8377;10,000 (one-time)</li>
-          <li>Access to 1&#8211;2 apartment complexes</li>
-          <li>1 structured interaction/month</li>
-          <li>Revenue sharing as per agreement</li>
-          <li>Same complex exclusivity only</li>
-          <li>AOA/Society charges additional</li>
-        </ul>
+    <!-- PRICING TIER TABS -->
+    <div class="tier-tabs fade-up">
+      <button class="tier-tab active" onclick="switchTier('starter')">
+        <span class="tier-tab-icon">🏘️</span>
+        <span class="tier-tab-name">Starter</span>
+        <span class="tier-tab-price">₹15K–25K</span>
+      </button>
+      <button class="tier-tab" onclick="switchTier('growth')">
+        <span class="tier-tab-badge">Popular</span>
+        <span class="tier-tab-icon">📈</span>
+        <span class="tier-tab-name">Growth</span>
+        <span class="tier-tab-price">₹25K–40K</span>
+      </button>
+      <button class="tier-tab" onclick="switchTier('premium')">
+        <span class="tier-tab-icon">🏆</span>
+        <span class="tier-tab-name">Premium</span>
+        <span class="tier-tab-price">₹60K+</span>
+      </button>
+    </div>
+
+    <!-- TIER CONTENT CARDS -->
+    <div id="tier-starter" class="tier-content fade-up">
+      <div class="tier-card">
+        <div class="tier-card-left">
+          <div class="tier-card-label">Starter Tier</div>
+          <div class="tier-card-title">Market Entry</div>
+          <div class="tier-card-amount">₹15,000 <span>–</span> ₹25,000<small>/month</small></div>
+          <p class="tier-card-desc">Perfect for businesses testing the hyperlocal market before scaling. Get your foot in the door with 1–2 apartment complexes.</p>
+          <div class="tier-card-note">+ One-time onboarding fee ₹10,000 at signing</div>
+          <a href="#payment" class="tier-card-cta">Start with Starter ↗</a>
+        </div>
+        <div class="tier-card-right">
+          <div class="tier-features-title">What's Included</div>
+          <ul class="tier-features">
+            <li><span class="tf-yes">✓</span> Access to 1–2 apartment complexes</li>
+            <li><span class="tf-yes">✓</span> 1 structured community interaction/month</li>
+            <li><span class="tf-yes">✓</span> Revenue sharing as per agreement</li>
+            <li><span class="tf-yes">✓</span> Monthly activity report</li>
+            <li><span class="tf-yes">✓</span> Basic community introduction</li>
+            <li><span class="tf-no">✗</span> Managed outreach (not included)</li>
+            <li><span class="tf-note">+</span> AOA/Society charges additional (on actual)</li>
+          </ul>
+        </div>
       </div>
-      <div class="price-card featured">
-        <div class="price-badge">Most Popular</div>
-        <div class="price-tier">Growth</div>
-        <h3>Active Expansion</h3>
-        <div class="price-amount">&#8377;25K&#8211;40K <span>/ month</span></div>
-        <p class="price-desc">Multi-complex reach with managed outreach</p>
-        <ul class="price-features">
-          <li>Onboarding fee: &#8377;10,000 (one-time)</li>
-          <li>Multi-complex access (selected)</li>
-          <li>Multiple interactions/month</li>
-          <li>Managed outreach included</li>
-          <li>Revenue sharing as per agreement</li>
-          <li>AOA/Society charges additional</li>
-        </ul>
+    </div>
+
+    <div id="tier-growth" class="tier-content fade-up" style="display:none;">
+      <div class="tier-card tier-card-growth">
+        <div class="tier-card-pop-badge">⭐ Most Popular</div>
+        <div class="tier-card-left">
+          <div class="tier-card-label" style="color:var(--cyan);">Growth Tier</div>
+          <div class="tier-card-title" style="color:#fff;">Active Expansion</div>
+          <div class="tier-card-amount" style="color:var(--cyan);">₹25,000 <span>–</span> ₹40,000<small>/month</small></div>
+          <p class="tier-card-desc" style="color:rgba(255,255,255,.65);">Multi-apartment reach with managed outreach included. The most popular choice for businesses ready to grow actively.</p>
+          <div class="tier-card-note" style="background:rgba(41,182,246,.15);color:var(--cyan);">+ One-time onboarding fee ₹10,000 at signing</div>
+          <a href="#payment" class="tier-card-cta" style="background:var(--cyan);color:var(--bg-dark);">Start with Growth ↗</a>
+        </div>
+        <div class="tier-card-right">
+          <div class="tier-features-title" style="color:rgba(255,255,255,.5);">What's Included</div>
+          <ul class="tier-features">
+            <li style="color:rgba(255,255,255,.8);"><span class="tf-yes">✓</span> Multi-complex access (selected)</li>
+            <li style="color:rgba(255,255,255,.8);"><span class="tf-yes">✓</span> Multiple interactions/month</li>
+            <li style="color:rgba(255,255,255,.8);"><span class="tf-yes">✓</span> Managed calling &amp; lead generation</li>
+            <li style="color:rgba(255,255,255,.8);"><span class="tf-yes">✓</span> Revenue sharing as per agreement</li>
+            <li style="color:rgba(255,255,255,.8);"><span class="tf-yes">✓</span> Monthly performance review</li>
+            <li style="color:rgba(255,255,255,.8);"><span class="tf-yes">✓</span> Event facilitation support</li>
+            <li style="color:rgba(255,255,255,.4);"><span class="tf-note">+</span> AOA/Society charges additional</li>
+          </ul>
+        </div>
       </div>
-      <div class="price-card">
-        <div class="price-tier">Premium</div>
-        <h3>Full Presence</h3>
-        <div class="price-amount">&#8377;60K+ <span>/ month</span></div>
-        <p class="price-desc">Deep, sustained community market presence</p>
-        <ul class="price-features">
-          <li>Onboarding fee: &#8377;10,000 (one-time)</li>
-          <li>Full locality engagement</li>
-          <li>Priority event access + dedicated campaigns</li>
-          <li>Managed outreach + co-branding</li>
-          <li>Rev share + equity (selective)</li>
-          <li>AOA/Society charges additional</li>
-        </ul>
+    </div>
+
+    <div id="tier-premium" class="tier-content fade-up" style="display:none;">
+      <div class="tier-card">
+        <div class="tier-card-left">
+          <div class="tier-card-label">Premium Tier</div>
+          <div class="tier-card-title">Full Presence</div>
+          <div class="tier-card-amount">₹60,000+<small>/month</small></div>
+          <p class="tier-card-desc">Deep, sustained community market presence with dedicated campaigns, co-branding, and senior advisory involvement.</p>
+          <div class="tier-card-note">+ One-time onboarding fee ₹10,000 at signing</div>
+          <a href="#payment" class="tier-card-cta">Start with Premium ↗</a>
+        </div>
+        <div class="tier-card-right">
+          <div class="tier-features-title">What's Included</div>
+          <ul class="tier-features">
+            <li><span class="tf-yes">✓</span> Full locality engagement</li>
+            <li><span class="tf-yes">✓</span> Dedicated campaigns &amp; co-branding</li>
+            <li><span class="tf-yes">✓</span> Priority association event access</li>
+            <li><span class="tf-yes">✓</span> Senior advisory involvement</li>
+            <li><span class="tf-yes">✓</span> Rev share + equity (selective)</li>
+            <li><span class="tf-yes">✓</span> Directory ad placement included</li>
+            <li><span class="tf-note">+</span> AOA/Society charges additional</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -925,99 +1067,117 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
       <p class="section-sub">Monthly subscriptions auto-renew until cancelled. One-time fees charged once at agreement signing.</p>
     </div>
 
-    <!-- TAB SWITCHER -->
-    <div class="pay-tabs fade-up">
-      <button class="pay-tab active" onclick="switchTab('subscription')">📅 Monthly Subscriptions</button>
-      <button class="pay-tab" onclick="switchTab('onetime')">💳 One-Time Payments</button>
+    <!-- PAYMENT TAB SWITCHER — full width pill style -->
+    <div class="pay-pill-tabs fade-up">
+      <button class="pay-pill active" id="pill-sub" onclick="switchPayTab('subscription')">
+        <span>📅</span> Monthly Subscriptions
+      </button>
+      <button class="pay-pill" id="pill-one" onclick="switchPayTab('onetime')">
+        <span>💳</span> One-Time Payments
+      </button>
     </div>
 
-    <!-- SUBSCRIPTION TAB -->
-    <div id="tab-subscription" class="pay-tab-content">
-      <div class="pay-sub-note">
-        <span>🔄</span> Monthly auto-debit · Cancel anytime · Secure via Razorpay
+    <!-- SUBSCRIPTION PANEL -->
+    <div id="tab-subscription" class="pay-panel">
+      <div class="pay-panel-note">
+        🔄 Monthly auto-debit &nbsp;·&nbsp; Cancel anytime &nbsp;·&nbsp; Secure via Razorpay
       </div>
-      <div class="pay-grid fade-up">
 
-        <!-- STARTER SUBSCRIPTION -->
-        <div class="pay-card">
-          <div class="pay-card-icon">🏘️</div>
-          <div class="pay-card-label">Starter Tier</div>
-          <div class="pay-card-amount">&#8377;15K–25K<span style="font-size:14px;font-weight:400;color:var(--text-muted);"> / month</span></div>
-          <p class="pay-card-desc">Market Entry — 1–2 apartment complexes. Auto-debits monthly until you cancel.</p>
-          <div class="pay-custom-row">
-            <input type="number" id="sub-starter-amt" placeholder="Your agreed amount" min="15000" max="25000" />
-            <span>₹</span>
-          </div>
-          <div class="pay-input-hint">Enter amount between ₹15,000 – ₹25,000</div>
-          <button class="pay-btn pay-btn-outline" onclick="startSubscription('starter')">
-            Subscribe — Starter ↗
-          </button>
-        </div>
-
-        <!-- GROWTH SUBSCRIPTION -->
-        <div class="pay-card pay-card-featured">
-          <div class="pay-featured-badge">Most Popular</div>
-          <div class="pay-card-icon">📈</div>
-          <div class="pay-card-label">Growth Tier</div>
-          <div class="pay-card-amount">&#8377;25K–40K<span style="font-size:14px;font-weight:400;color:rgba(255,255,255,.5);"> / month</span></div>
-          <p class="pay-card-desc">Active Expansion — multi-complex access + managed outreach. Auto-debits monthly.</p>
-          <div class="pay-custom-row">
-            <input type="number" id="sub-growth-amt" placeholder="Your agreed amount" min="25000" max="40000" />
-            <span>₹</span>
-          </div>
-          <div class="pay-input-hint">Enter amount between ₹25,000 – ₹40,000</div>
-          <button class="pay-btn" onclick="startSubscription('growth')">
-            Subscribe — Growth ↗
-          </button>
-        </div>
-
-        <!-- PREMIUM SUBSCRIPTION -->
-        <div class="pay-card">
-          <div class="pay-card-icon">🏆</div>
-          <div class="pay-card-label">Premium Tier</div>
-          <div class="pay-card-amount">&#8377;60K+<span style="font-size:14px;font-weight:400;color:var(--text-muted);"> / month</span></div>
-          <p class="pay-card-desc">Full Presence — full locality engagement + dedicated campaigns. Auto-debits monthly.</p>
-          <div class="pay-custom-row">
-            <input type="number" id="sub-premium-amt" placeholder="Your agreed amount" min="60000" />
-            <span>₹</span>
-          </div>
-          <div class="pay-input-hint">Enter amount ₹60,000 or above</div>
-          <button class="pay-btn pay-btn-outline" onclick="startSubscription('premium')">
-            Subscribe — Premium ↗
-          </button>
-        </div>
-
+      <!-- TIER SELECTOR inside payment -->
+      <div class="pay-tier-tabs">
+        <button class="pay-tier-pill active" id="ptier-starter" onclick="switchPayTier('starter')">🏘️ Starter</button>
+        <button class="pay-tier-pill" id="ptier-growth" onclick="switchPayTier('growth')">📈 Growth</button>
+        <button class="pay-tier-pill" id="ptier-premium" onclick="switchPayTier('premium')">🏆 Premium</button>
       </div>
+
+      <!-- STARTER -->
+      <div id="ptier-content-starter" class="pay-tier-content">
+        <div class="pay-tier-card">
+          <div class="ptc-left">
+            <div class="ptc-label">Starter Tier</div>
+            <div class="ptc-amount">₹15K – 25K<span>/month</span></div>
+            <p class="ptc-desc">Market Entry — 1–2 apartment complexes. Auto-debits monthly until you cancel.</p>
+          </div>
+          <div class="ptc-right">
+            <label class="ptc-input-label">Your agreed monthly amount</label>
+            <div class="ptc-input-wrap">
+              <span class="ptc-rupee">₹</span>
+              <input type="number" id="sub-starter-amt" placeholder="e.g. 20000" />
+            </div>
+            <button class="ptc-btn" onclick="startSubscription('starter')">Subscribe — Starter ↗</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROWTH -->
+      <div id="ptier-content-growth" class="pay-tier-content" style="display:none;">
+        <div class="pay-tier-card pay-tier-card-featured">
+          <div class="ptc-pop">⭐ Most Popular</div>
+          <div class="ptc-left">
+            <div class="ptc-label" style="color:var(--cyan);">Growth Tier</div>
+            <div class="ptc-amount" style="color:var(--cyan);">₹25K – 40K<span style="color:rgba(255,255,255,.4);">/month</span></div>
+            <p class="ptc-desc" style="color:rgba(255,255,255,.65);">Active Expansion — multi-complex + managed outreach. Auto-debits monthly.</p>
+          </div>
+          <div class="ptc-right">
+            <label class="ptc-input-label" style="color:rgba(255,255,255,.5);">Your agreed monthly amount</label>
+            <div class="ptc-input-wrap">
+              <span class="ptc-rupee" style="color:var(--cyan);">₹</span>
+              <input type="number" id="sub-growth-amt" placeholder="e.g. 30000" style="background:rgba(255,255,255,.08);border-color:rgba(41,182,246,.3);color:#fff;" />
+            </div>
+            <button class="ptc-btn" style="background:var(--cyan);color:var(--bg-dark);" onclick="startSubscription('growth')">Subscribe — Growth ↗</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREMIUM -->
+      <div id="ptier-content-premium" class="pay-tier-content" style="display:none;">
+        <div class="pay-tier-card">
+          <div class="ptc-left">
+            <div class="ptc-label">Premium Tier</div>
+            <div class="ptc-amount">₹60K+<span>/month</span></div>
+            <p class="ptc-desc">Full Presence — full locality + dedicated campaigns. Auto-debits monthly.</p>
+          </div>
+          <div class="ptc-right">
+            <label class="ptc-input-label">Your agreed monthly amount</label>
+            <div class="ptc-input-wrap">
+              <span class="ptc-rupee">₹</span>
+              <input type="number" id="sub-premium-amt" placeholder="e.g. 75000" />
+            </div>
+            <button class="ptc-btn" onclick="startSubscription('premium')">Subscribe — Premium ↗</button>
+          </div>
+        </div>
+      </div>
+
       <div class="pay-cancel-note">
-        <span>ℹ️</span> To cancel your subscription at any time, email <a href="mailto:info@rnexconsultancy.com">info@rnexconsultancy.com</a> or call <a href="tel:+919015095151">+91 9015095151</a> with your Payment ID. Cancellation takes effect from the next billing cycle.
+        <span>ℹ️</span> To cancel, email <a href="mailto:info@rnexconsultancy.com">info@rnexconsultancy.com</a> or call <a href="tel:+919015095151">+91 9015095151</a>. Cancellation takes effect from the next billing cycle.
       </div>
     </div>
 
-    <!-- ONE-TIME TAB -->
-    <div id="tab-onetime" class="pay-tab-content" style="display:none;">
-      <div class="pay-grid fade-up">
+    <!-- ONE-TIME PANEL -->
+    <div id="tab-onetime" class="pay-panel" style="display:none;">
+      <div class="pay-onetime-grid">
 
-        <!-- ONBOARDING FEE -->
-        <div class="pay-card">
-          <div class="pay-card-icon">🤝</div>
-          <div class="pay-card-label">One-Time Onboarding Fee</div>
-          <div class="pay-card-amount">&#8377;10,000</div>
-          <p class="pay-card-desc">Non-refundable. Applicable to all tiers at agreement signing. Charged once only.</p>
-          <button class="pay-btn" onclick="openPayment('onboarding')">Pay ₹10,000 Now</button>
+        <!-- ONBOARDING -->
+        <div class="pay-ot-card">
+          <div class="pay-ot-icon">🤝</div>
+          <div class="pay-ot-label">Onboarding Fee</div>
+          <div class="pay-ot-amount">₹10,000</div>
+          <p class="pay-ot-desc">One-time non-refundable fee at agreement signing. Applicable to all tiers.</p>
+          <button class="pay-ot-btn" onclick="openPayment('onboarding')">Pay ₹10,000 Now ↗</button>
         </div>
 
-        <!-- CUSTOM PAYMENT -->
-        <div class="pay-card pay-card-custom">
-          <div class="pay-card-icon">✏️</div>
-          <div class="pay-card-label">Custom / Other Payment</div>
-          <div class="pay-card-amount">Any Amount</div>
-          <p class="pay-card-desc">Directory advertising, event charges, AOA pass-through, or any other one-time payment.</p>
-          <div class="pay-custom-row">
-            <input type="number" id="input-custom" placeholder="Enter amount" min="1" />
-            <span>₹</span>
+        <!-- CUSTOM -->
+        <div class="pay-ot-card pay-ot-custom">
+          <div class="pay-ot-icon">✏️</div>
+          <div class="pay-ot-label">Custom Payment</div>
+          <div class="pay-ot-amount">Any Amount</div>
+          <p class="pay-ot-desc">Directory ads, event charges, AOA pass-through, or any other payment.</p>
+          <div class="ptc-input-wrap" style="margin-bottom:10px;">
+            <span class="ptc-rupee">₹</span>
+            <input type="number" id="input-custom" placeholder="Enter amount" />
           </div>
-          <input type="text" id="input-custom-desc" placeholder="Purpose (e.g. Directory Ad — Half Page)" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Barlow',sans-serif;font-size:13px;color:var(--text-primary);margin-bottom:12px;outline:none;background:var(--bg-light);" />
-          <button class="pay-btn pay-btn-green" onclick="openPayment('custom')">Pay Custom Amount</button>
+          <input type="text" id="input-custom-desc" placeholder="Purpose (e.g. Directory Ad — Half Page)" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;background:var(--bg-light);margin-bottom:12px;color:var(--text-primary);" />
+          <button class="pay-ot-btn pay-ot-btn-green" onclick="openPayment('custom')">Pay Custom Amount ↗</button>
         </div>
 
       </div>
@@ -1739,13 +1899,34 @@ document.addEventListener('DOMContentLoaded', function() {
 // Current pending payment context
 var _pendingPayment = null;
 
-// Tab switcher
-function switchTab(tab) {
-  document.getElementById('tab-subscription').style.display = tab==='subscription'?'block':'none';
-  document.getElementById('tab-onetime').style.display      = tab==='onetime'?'block':'none';
-  document.querySelectorAll('.pay-tab').forEach(function(b){b.classList.remove('active');});
-  event.target.classList.add('active');
+// Pricing tier tab switcher
+function switchTier(tier) {
+  ['starter','growth','premium'].forEach(function(t) {
+    document.getElementById('tier-'+t).style.display = t===tier ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tier-tab').forEach(function(b,i) {
+    b.classList.toggle('active', ['starter','growth','premium'][i]===tier);
+  });
 }
+
+// Payment main tab switcher
+function switchPayTab(tab) {
+  document.getElementById('tab-subscription').style.display = tab==='subscription' ? 'block' : 'none';
+  document.getElementById('tab-onetime').style.display      = tab==='onetime'      ? 'block' : 'none';
+  document.getElementById('pill-sub').classList.toggle('active', tab==='subscription');
+  document.getElementById('pill-one').classList.toggle('active', tab==='onetime');
+}
+
+// Payment tier switcher inside subscription tab
+function switchPayTier(tier) {
+  ['starter','growth','premium'].forEach(function(t) {
+    document.getElementById('ptier-content-'+t).style.display = t===tier ? 'block' : 'none';
+    document.getElementById('ptier-'+t).classList.toggle('active', t===tier);
+  });
+}
+
+// Legacy switchTab alias
+function switchTab(tab) { switchPayTab(tab); }
 
 // Open modal for subscriptions
 function startSubscription(tier) {

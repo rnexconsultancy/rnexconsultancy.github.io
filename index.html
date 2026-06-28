@@ -436,6 +436,33 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
 .pay-cancel-note{margin-top:24px;padding:14px 20px;background:var(--bg-light);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text-soft);line-height:1.6;}
 .pay-cancel-note a{color:var(--blue);font-weight:600;text-decoration:none;}
 
+/* PAYMENT MODAL */
+.pay-modal-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(13,27,62,.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
+.pay-modal-overlay.open{display:flex;}
+.pay-modal{background:#fff;border-radius:20px;padding:36px 40px;max-width:520px;width:100%;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.3);max-height:90vh;overflow-y:auto;}
+.pay-modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--bg-light);border:1px solid var(--border);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text-soft);transition:all .2s;}
+.pay-modal-close:hover{background:var(--blue);color:#fff;}
+.pay-modal-plan{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--bg-dark),#1a3a6e);border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+.pay-modal-plan-icon{font-size:2rem;flex-shrink:0;}
+.pay-modal-plan-info{display:flex;flex-direction:column;gap:3px;}
+.pay-modal-plan-name{color:#fff;font-size:15px;font-weight:700;}
+.pay-modal-plan-amount{color:var(--cyan);font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:800;line-height:1;}
+.pay-modal-plan-type{color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.06em;}
+.pay-modal h3{font-family:'Barlow Condensed',sans-serif;font-size:1.7rem;font-weight:800;color:var(--charcoal);margin-bottom:4px;}
+.pay-modal-sub{font-size:13px;color:var(--text-muted);margin-bottom:22px;}
+.pay-modal .mg{margin-bottom:14px;}
+.pay-modal .mg label{display:block;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.pay-modal .mg input,.pay-modal .mg textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Barlow',sans-serif;font-size:14px;color:var(--text-primary);outline:none;transition:border-color .2s;background:var(--bg-light);}
+.pay-modal .mg input:focus{border-color:var(--blue);}
+.pay-modal .mg input.required-err{border-color:#e53935;}
+.pay-modal-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.pay-modal-btn{width:100%;padding:15px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-family:'Barlow',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:8px;letter-spacing:.02em;}
+.pay-modal-btn:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(21,101,192,.3);}
+.pay-modal-btn:disabled{background:var(--text-muted);cursor:not-allowed;transform:none;box-shadow:none;}
+.pay-modal-secure{display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--text-muted);margin-top:14px;flex-wrap:wrap;}
+.pay-modal-secure span{display:flex;align-items:center;gap:4px;}
+@media(max-width:540px){.pay-modal{padding:24px 18px;}.pay-modal-row{grid-template-columns:1fr;}}
+
 .fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 .fade-up.d1{transition-delay:.1s}
@@ -1556,6 +1583,58 @@ document.querySelectorAll('.legal-overlay').forEach(function(ov){
 
 </script>
 
+<!-- PAYMENT DETAILS MODAL -->
+<div class="pay-modal-overlay" id="pay-modal-overlay">
+  <div class="pay-modal">
+    <button class="pay-modal-close" onclick="closePayModal()">&#10005;</button>
+
+    <!-- Selected plan summary -->
+    <div class="pay-modal-plan" id="modal-plan-summary">
+      <div class="pay-modal-plan-icon" id="modal-plan-icon">📋</div>
+      <div class="pay-modal-plan-info">
+        <div class="pay-modal-plan-name" id="modal-plan-name">Plan Name</div>
+        <div class="pay-modal-plan-amount" id="modal-plan-amount">₹0</div>
+        <div class="pay-modal-plan-type" id="modal-plan-type">Monthly Subscription</div>
+      </div>
+    </div>
+
+    <h3>Your Details</h3>
+    <p class="pay-modal-sub">Please fill in your details for the invoice and subscription setup.</p>
+
+    <div class="pay-modal-row">
+      <div class="mg">
+        <label>Full Name *</label>
+        <input type="text" id="modal-name" placeholder="e.g. Rajesh Sharma" />
+      </div>
+      <div class="mg">
+        <label>Mobile Number *</label>
+        <input type="tel" id="modal-mobile" placeholder="+91 98765 43210" />
+      </div>
+    </div>
+    <div class="mg">
+      <label>Email Address *</label>
+      <input type="email" id="modal-email" placeholder="your@email.com" />
+    </div>
+    <div class="mg">
+      <label>Business / Company Name</label>
+      <input type="text" id="modal-business" placeholder="e.g. ABC Pvt Ltd (optional)" />
+    </div>
+    <div class="mg">
+      <label>Address</label>
+      <input type="text" id="modal-address" placeholder="Full address for invoice (optional)" />
+    </div>
+
+    <button class="pay-modal-btn" id="modal-pay-btn" onclick="proceedToPayment()">
+      Proceed to Payment &#8594;
+    </button>
+    <div class="pay-modal-secure">
+      <span>🔒 SSL Secured</span>
+      <span>🏦 Powered by Razorpay</span>
+      <span>📧 Invoice sent to email</span>
+    </div>
+  </div>
+</div>
+
 <!-- Razorpay SDK -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -1564,25 +1643,26 @@ document.querySelectorAll('.legal-overlay').forEach(function(ov){
    ✏️  PAYMENT CONFIG — EDIT THIS BLOCK ONLY
    ═══════════════════════════════════════════════════════════════ */
 var RNEX_CONFIG = {
-  key:        'rzp_live_T6x2P8kIV7Mx0G',
-  company:    'RNEx Consultancy LLP',
-  currency:   'INR',
-  theme:      '#1565C0',
-  logo:       '/logo.png',
-  contact:    '9015095151',
-  email:      'info@rnexconsultancy.com',
-  serverUrl:  'https://rnex-payment-server.onrender.com',
+  key:       'rzp_live_T6x2P8kIV7Mx0G',
+  company:   'RNEx Consultancy LLP',
+  currency:  'INR',
+  theme:     '#1565C0',
+  logo:      '/logo.png',
+  contact:   '9015095151',
+  email:     'info@rnexconsultancy.com',
+  serverUrl: 'https://rnex-payment-server.onrender.com',
   onboarding: 1000000,
-  tierNames: {
-    starter: 'Starter Tier',
-    growth:  'Growth Tier',
-    premium: 'Premium Tier',
-  }
+  tierNames: { starter:'Starter Tier', growth:'Growth Tier', premium:'Premium Tier' },
+  tierIcons: { starter:'🏘️', growth:'📈', premium:'🏆', onboarding:'🤝', custom:'✏️' },
 };
 /* ═══════════════════════════════════════════════════════════════
    END CONFIG
    ═══════════════════════════════════════════════════════════════ */
 
+// Current pending payment context
+var _pendingPayment = null;
+
+// Tab switcher
 function switchTab(tab) {
   document.getElementById('tab-subscription').style.display = tab==='subscription'?'block':'none';
   document.getElementById('tab-onetime').style.display      = tab==='onetime'?'block':'none';
@@ -1590,69 +1670,165 @@ function switchTab(tab) {
   event.target.classList.add('active');
 }
 
-async function startSubscription(tier) {
+// Open modal for subscriptions
+function startSubscription(tier) {
   var tierName = RNEX_CONFIG.tierNames[tier];
   var inp = parseFloat(document.getElementById('sub-'+tier+'-amt').value);
-  if (!inp||inp<1){alert('Please enter your agreed monthly retainer amount first.');return;}
-  // No range restriction — any agreed amount accepted
-  var email=prompt('Please enter your email address:');
-  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
-  var name=prompt('Your full name:')||email;
-  var btn=event.target;
-  btn.textContent='Setting up…';btn.disabled=true;
-  try {
-    var res=await fetch(RNEX_CONFIG.serverUrl+'/create-subscription',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({tier,amount:inp,name,email})
-    });
-    var data=await res.json();
-    if(!data.success)throw new Error(data.error||'Server error');
-    var options={
-      key:RNEX_CONFIG.key,
-      subscription_id:data.subscription_id,
-      name:RNEX_CONFIG.company,
-      description:tierName+' · ₹'+inp.toLocaleString('en-IN')+'/month',
-      image:RNEX_CONFIG.logo,
-      prefill:{name:name,email:email,contact:RNEX_CONFIG.contact},
-      theme:{color:RNEX_CONFIG.theme},
-      handler:function(r){
-        alert('✅ Subscription Activated!\n\nSubscription ID: '+r.razorpay_subscription_id+'\nPayment ID: '+r.razorpay_payment_id+'\n\nAuto-renews monthly. To cancel email info@rnexconsultancy.com');
-      }
-    };
-    var rzp=new Razorpay(options);
-    rzp.on('payment.failed',function(r){alert('❌ Failed: '+r.error.description);});
-    rzp.open();
-  } catch(err){
-    alert('❌ Error: '+err.message+'\nContact info@rnexconsultancy.com or +91 9015095151');
-  } finally {
-    btn.textContent='Subscribe — '+tierName.split(' ')[0]+' ↗';btn.disabled=false;
-  }
+  if (!inp||inp<1) { alert('Please enter your agreed monthly retainer amount first.'); return; }
+
+  _pendingPayment = { type:'subscription', tier:tier, amount:inp };
+
+  // Update modal plan summary
+  document.getElementById('modal-plan-icon').textContent   = RNEX_CONFIG.tierIcons[tier];
+  document.getElementById('modal-plan-name').textContent   = tierName + ' — Monthly Retainer';
+  document.getElementById('modal-plan-amount').textContent = '₹' + inp.toLocaleString('en-IN') + '/month';
+  document.getElementById('modal-plan-type').textContent   = '🔄 Monthly Subscription · Cancel anytime';
+  document.getElementById('modal-pay-btn').textContent     = 'Subscribe & Pay ₹' + inp.toLocaleString('en-IN') + ' →';
+
+  openPayModal();
 }
 
+// Open modal for one-time payments
 function openPayment(type) {
-  var amount,desc;
-  if(type==='onboarding'){
-    amount=RNEX_CONFIG.onboarding;
-    desc='One-Time Onboarding Fee — RNEx Consultancy LLP';
-  } else if(type==='custom'){
-    var inp=parseFloat(document.getElementById('input-custom').value);
-    var purpose=document.getElementById('input-custom-desc').value.trim();
-    if(!inp||inp<1){alert('Please enter the payment amount.');return;}
-    if(!purpose){alert('Please describe the purpose.');return;}
-    amount=Math.round(inp*100);
-    desc=purpose+' — RNEx Consultancy LLP';
+  var amount, desc, icon;
+
+  if (type==='onboarding') {
+    amount = RNEX_CONFIG.onboarding / 100;
+    desc   = 'One-Time Onboarding Fee';
+    icon   = '🤝';
+    document.getElementById('modal-plan-type').textContent = '💳 One-Time Payment · Non-refundable';
+  } else if (type==='custom') {
+    var inp     = parseFloat(document.getElementById('input-custom').value);
+    var purpose = document.getElementById('input-custom-desc').value.trim();
+    if (!inp||inp<1) { alert('Please enter the payment amount.'); return; }
+    if (!purpose)    { alert('Please describe the purpose of this payment.'); return; }
+    amount = inp;
+    desc   = purpose;
+    icon   = '✏️';
+    document.getElementById('modal-plan-type').textContent = '💳 One-Time Payment';
   }
-  var options={
-    key:RNEX_CONFIG.key,amount:amount,currency:RNEX_CONFIG.currency,
-    name:RNEX_CONFIG.company,description:desc,image:RNEX_CONFIG.logo,
-    prefill:{contact:RNEX_CONFIG.contact,email:RNEX_CONFIG.email},
-    theme:{color:RNEX_CONFIG.theme},
-    handler:function(r){alert('✅ Payment Successful!\n\nPayment ID: '+r.razorpay_payment_id+'\n\nPlease save this ID.');}
-  };
-  var rzp=new Razorpay(options);
-  rzp.on('payment.failed',function(r){alert('❌ Failed: '+r.error.description);});
-  rzp.open();
+
+  _pendingPayment = { type:'onetime', payType:type, amount:amount, desc:desc };
+
+  document.getElementById('modal-plan-icon').textContent   = icon;
+  document.getElementById('modal-plan-name').textContent   = desc;
+  document.getElementById('modal-plan-amount').textContent = '₹' + amount.toLocaleString('en-IN');
+  document.getElementById('modal-pay-btn').textContent     = 'Proceed & Pay ₹' + amount.toLocaleString('en-IN') + ' →';
+
+  openPayModal();
+}
+
+function openPayModal() {
+  // Clear previous values
+  ['modal-name','modal-mobile','modal-email','modal-business','modal-address'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) { el.value=''; el.classList.remove('required-err'); }
+  });
+  document.getElementById('pay-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ document.getElementById('modal-name').focus(); }, 100);
+}
+
+function closePayModal() {
+  document.getElementById('pay-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  _pendingPayment = null;
+}
+
+// Close on overlay click
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('pay-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closePayModal();
+  });
+});
+
+async function proceedToPayment() {
+  // Collect & validate form
+  var name     = document.getElementById('modal-name').value.trim();
+  var mobile   = document.getElementById('modal-mobile').value.trim();
+  var email    = document.getElementById('modal-email').value.trim();
+  var business = document.getElementById('modal-business').value.trim();
+  var address  = document.getElementById('modal-address').value.trim();
+
+  // Validate required fields
+  var valid = true;
+  if (!name)  { document.getElementById('modal-name').classList.add('required-err');  valid=false; }
+  if (!mobile){ document.getElementById('modal-mobile').classList.add('required-err');valid=false; }
+  if (!email || !email.includes('@')) { document.getElementById('modal-email').classList.add('required-err'); valid=false; }
+  if (!valid) { alert('Please fill in Name, Mobile and Email.'); return; }
+
+  var btn = document.getElementById('modal-pay-btn');
+  btn.disabled = true;
+  btn.textContent = 'Please wait…';
+
+  var p = _pendingPayment;
+
+  try {
+    if (p.type === 'subscription') {
+      // Call server to create subscription
+      var res = await fetch(RNEX_CONFIG.serverUrl + '/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tier:     p.tier,
+          amount:   p.amount,
+          name:     name,
+          email:    email,
+          mobile:   mobile,
+          business: business,
+          address:  address,
+        })
+      });
+      var data = await res.json();
+      if (!data.success) throw new Error(data.error || 'Server error');
+
+      closePayModal();
+
+      // Open Razorpay subscription checkout
+      var options = {
+        key:             RNEX_CONFIG.key,
+        subscription_id: data.subscription_id,
+        name:            RNEX_CONFIG.company,
+        description:     RNEX_CONFIG.tierNames[p.tier] + ' · ₹' + p.amount.toLocaleString('en-IN') + '/month',
+        image:           RNEX_CONFIG.logo,
+        prefill:         { name:name, email:email, contact:mobile },
+        theme:           { color:RNEX_CONFIG.theme },
+        handler: function(r) {
+          alert('✅ Subscription Activated!\n\nSubscription ID: '+r.razorpay_subscription_id+'\nPayment ID: '+r.razorpay_payment_id+'\n\nAuto-renews monthly.\nInvoice will be sent to '+email+'\n\nTo cancel: email info@rnexconsultancy.com');
+        }
+      };
+      var rzp = new Razorpay(options);
+      rzp.on('payment.failed', function(r){ alert('❌ Payment failed: '+r.error.description); });
+      rzp.open();
+
+    } else {
+      // One-time payment
+      var amountPaise = Math.round(p.amount * 100);
+      closePayModal();
+
+      var options = {
+        key:         RNEX_CONFIG.key,
+        amount:      amountPaise,
+        currency:    RNEX_CONFIG.currency,
+        name:        RNEX_CONFIG.company,
+        description: p.desc + ' — RNEx Consultancy LLP',
+        image:       RNEX_CONFIG.logo,
+        prefill:     { name:name, email:email, contact:mobile },
+        notes:       { customer_name:name, business:business, address:address },
+        theme:       { color:RNEX_CONFIG.theme },
+        handler: function(r) {
+          alert('✅ Payment Successful!\n\nPayment ID: '+r.razorpay_payment_id+'\nInvoice will be sent to '+email+'\n\nPlease save this ID.');
+        }
+      };
+      var rzp = new Razorpay(options);
+      rzp.on('payment.failed', function(r){ alert('❌ Failed: '+r.error.description); });
+      rzp.open();
+    }
+  } catch(err) {
+    alert('❌ Error: '+err.message+'\nContact info@rnexconsultancy.com or +91 9015095151');
+    btn.disabled = false;
+    btn.textContent = 'Proceed to Payment →';
+  }
 }
 </script>
 </body>

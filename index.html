@@ -424,6 +424,17 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
 .pay-btn-green:hover{background:#1b5e20;}
 .pay-security{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;padding:20px;background:var(--bg-light);border:1px solid var(--border);border-radius:12px;}
 .pay-security-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-soft);font-weight:600;}
+/* Pay tabs */
+.pay-tabs{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;}
+.pay-tab{padding:12px 28px;border-radius:8px;border:2px solid var(--border);background:var(--bg-light);color:var(--text-soft);font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.pay-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.pay-tab:hover:not(.active){border-color:var(--blue);color:var(--blue);}
+.pay-tab-content{animation:fadein .3s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.pay-sub-note{background:linear-gradient(135deg,rgba(21,101,192,.06),rgba(41,182,246,.06));border:1px solid var(--border);border-radius:10px;padding:12px 20px;font-size:13px;color:var(--blue);font-weight:600;margin-bottom:28px;display:flex;align-items:center;gap:8px;}
+.pay-input-hint{font-size:11px;color:var(--text-muted);margin-top:-6px;margin-bottom:6px;}
+.pay-cancel-note{margin-top:24px;padding:14px 20px;background:var(--bg-light);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text-soft);line-height:1.6;}
+.pay-cancel-note a{color:var(--blue);font-weight:600;text-decoration:none;}
 
 .fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
@@ -852,99 +863,122 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════
-     RAZORPAY PAYMENT SECTION
-     ✏️  EDIT ONLY THE CONFIG BLOCK BELOW TO CHANGE ANY AMOUNT
+     RAZORPAY PAYMENT SECTION — SUBSCRIPTION + ONE-TIME
+     ✏️  EDIT ONLY THE CONFIG BLOCK IN THE JS BELOW
      ═══════════════════════════════════════════════════════════ -->
 <section id="payment" style="background:var(--bg-white);">
   <div class="section-inner">
     <div class="pay-header fade-up">
       <span class="section-label">Payments</span>
       <h2 class="section-title">Simple, Secure Online Payments</h2>
-      <p class="section-sub">Pay your onboarding fee, monthly retainer, or custom amount — directly and securely via Razorpay.</p>
+      <p class="section-sub">Monthly subscriptions auto-renew until cancelled. One-time fees charged once at agreement signing.</p>
     </div>
 
-    <!-- PAYMENT CARDS -->
-    <div class="pay-grid fade-up">
-
-      <!-- CARD 1: Onboarding Fee -->
-      <div class="pay-card">
-        <div class="pay-card-icon">🤝</div>
-        <div class="pay-card-label">One-Time Onboarding Fee</div>
-        <div class="pay-card-amount" id="disp-onboarding">&#8377;10,000</div>
-        <p class="pay-card-desc">Non-refundable. Applicable to all tiers at agreement signing.</p>
-        <button class="pay-btn" onclick="openPayment('onboarding')">Pay Onboarding Fee</button>
-      </div>
-
-      <!-- CARD 2: Starter Retainer -->
-      <div class="pay-card">
-        <div class="pay-card-icon">🏘️</div>
-        <div class="pay-card-label">Starter Tier — Monthly Retainer</div>
-        <div class="pay-card-amount" id="disp-starter">&#8377;15,000</div>
-        <p class="pay-card-desc">Market Entry plan. Amount within ₹15,000–₹25,000 as per your agreement.</p>
-        <div class="pay-custom-row">
-          <input type="number" id="input-starter" placeholder="Enter agreed amount" min="15000" max="25000" />
-          <span>₹</span>
-        </div>
-        <button class="pay-btn pay-btn-outline" onclick="openPayment('starter')">Pay Starter Retainer</button>
-      </div>
-
-      <!-- CARD 3: Growth Retainer -->
-      <div class="pay-card pay-card-featured">
-        <div class="pay-featured-badge">Most Popular</div>
-        <div class="pay-card-icon">📈</div>
-        <div class="pay-card-label">Growth Tier — Monthly Retainer</div>
-        <div class="pay-card-amount" id="disp-growth">&#8377;25,000</div>
-        <p class="pay-card-desc">Active Expansion plan. Amount within ₹25,000–₹40,000 as per your agreement.</p>
-        <div class="pay-custom-row">
-          <input type="number" id="input-growth" placeholder="Enter agreed amount" min="25000" max="40000" />
-          <span>₹</span>
-        </div>
-        <button class="pay-btn" onclick="openPayment('growth')">Pay Growth Retainer</button>
-      </div>
-
-      <!-- CARD 4: Premium Retainer -->
-      <div class="pay-card">
-        <div class="pay-card-icon">🏆</div>
-        <div class="pay-card-label">Premium Tier — Monthly Retainer</div>
-        <div class="pay-card-amount" id="disp-premium">&#8377;60,000</div>
-        <p class="pay-card-desc">Full Presence plan. Amount as per your agreement (₹60,000 and above).</p>
-        <div class="pay-custom-row">
-          <input type="number" id="input-premium" placeholder="Enter agreed amount" min="60000" />
-          <span>₹</span>
-        </div>
-        <button class="pay-btn pay-btn-outline" onclick="openPayment('premium')">Pay Premium Retainer</button>
-      </div>
-
-      <!-- CARD 5: Custom Amount -->
-      <div class="pay-card pay-card-custom">
-        <div class="pay-card-icon">✏️</div>
-        <div class="pay-card-label">Custom / Other Payment</div>
-        <div class="pay-card-amount">Pay Any Amount</div>
-        <p class="pay-card-desc">Directory advertising, event charges, AOA pass-through, or any other payment to RNEx.</p>
-        <div class="pay-custom-row">
-          <input type="number" id="input-custom" placeholder="Enter amount" min="1" />
-          <span>₹</span>
-        </div>
-        <input type="text" id="input-custom-desc" placeholder="Purpose (e.g. Directory Ad — Half Page)" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Barlow',sans-serif;font-size:13px;color:var(--text-primary);margin-bottom:12px;outline:none;background:var(--bg-light);" />
-        <button class="pay-btn pay-btn-green" onclick="openPayment('custom')">Pay Custom Amount</button>
-      </div>
-
+    <!-- TAB SWITCHER -->
+    <div class="pay-tabs fade-up">
+      <button class="pay-tab active" onclick="switchTab('subscription')">📅 Monthly Subscriptions</button>
+      <button class="pay-tab" onclick="switchTab('onetime')">💳 One-Time Payments</button>
     </div>
 
-    <!-- Security note -->
+    <!-- SUBSCRIPTION TAB -->
+    <div id="tab-subscription" class="pay-tab-content">
+      <div class="pay-sub-note">
+        <span>🔄</span> Monthly auto-debit · Cancel anytime · Secure via Razorpay
+      </div>
+      <div class="pay-grid fade-up">
+
+        <!-- STARTER SUBSCRIPTION -->
+        <div class="pay-card">
+          <div class="pay-card-icon">🏘️</div>
+          <div class="pay-card-label">Starter Tier</div>
+          <div class="pay-card-amount">&#8377;15K–25K<span style="font-size:14px;font-weight:400;color:var(--text-muted);"> / month</span></div>
+          <p class="pay-card-desc">Market Entry — 1–2 apartment complexes. Auto-debits monthly until you cancel.</p>
+          <div class="pay-custom-row">
+            <input type="number" id="sub-starter-amt" placeholder="Your agreed amount" min="15000" max="25000" />
+            <span>₹</span>
+          </div>
+          <div class="pay-input-hint">Enter amount between ₹15,000 – ₹25,000</div>
+          <button class="pay-btn pay-btn-outline" onclick="startSubscription('starter')">
+            Subscribe — Starter ↗
+          </button>
+        </div>
+
+        <!-- GROWTH SUBSCRIPTION -->
+        <div class="pay-card pay-card-featured">
+          <div class="pay-featured-badge">Most Popular</div>
+          <div class="pay-card-icon">📈</div>
+          <div class="pay-card-label">Growth Tier</div>
+          <div class="pay-card-amount">&#8377;25K–40K<span style="font-size:14px;font-weight:400;color:rgba(255,255,255,.5);"> / month</span></div>
+          <p class="pay-card-desc">Active Expansion — multi-complex access + managed outreach. Auto-debits monthly.</p>
+          <div class="pay-custom-row">
+            <input type="number" id="sub-growth-amt" placeholder="Your agreed amount" min="25000" max="40000" />
+            <span>₹</span>
+          </div>
+          <div class="pay-input-hint">Enter amount between ₹25,000 – ₹40,000</div>
+          <button class="pay-btn" onclick="startSubscription('growth')">
+            Subscribe — Growth ↗
+          </button>
+        </div>
+
+        <!-- PREMIUM SUBSCRIPTION -->
+        <div class="pay-card">
+          <div class="pay-card-icon">🏆</div>
+          <div class="pay-card-label">Premium Tier</div>
+          <div class="pay-card-amount">&#8377;60K+<span style="font-size:14px;font-weight:400;color:var(--text-muted);"> / month</span></div>
+          <p class="pay-card-desc">Full Presence — full locality engagement + dedicated campaigns. Auto-debits monthly.</p>
+          <div class="pay-custom-row">
+            <input type="number" id="sub-premium-amt" placeholder="Your agreed amount" min="60000" />
+            <span>₹</span>
+          </div>
+          <div class="pay-input-hint">Enter amount ₹60,000 or above</div>
+          <button class="pay-btn pay-btn-outline" onclick="startSubscription('premium')">
+            Subscribe — Premium ↗
+          </button>
+        </div>
+
+      </div>
+      <div class="pay-cancel-note">
+        <span>ℹ️</span> To cancel your subscription at any time, email <a href="mailto:info@rnexconsultancy.com">info@rnexconsultancy.com</a> or call <a href="tel:+919015095151">+91 9015095151</a> with your Payment ID. Cancellation takes effect from the next billing cycle.
+      </div>
+    </div>
+
+    <!-- ONE-TIME TAB -->
+    <div id="tab-onetime" class="pay-tab-content" style="display:none;">
+      <div class="pay-grid fade-up">
+
+        <!-- ONBOARDING FEE -->
+        <div class="pay-card">
+          <div class="pay-card-icon">🤝</div>
+          <div class="pay-card-label">One-Time Onboarding Fee</div>
+          <div class="pay-card-amount">&#8377;10,000</div>
+          <p class="pay-card-desc">Non-refundable. Applicable to all tiers at agreement signing. Charged once only.</p>
+          <button class="pay-btn" onclick="openPayment('onboarding')">Pay ₹10,000 Now</button>
+        </div>
+
+        <!-- CUSTOM PAYMENT -->
+        <div class="pay-card pay-card-custom">
+          <div class="pay-card-icon">✏️</div>
+          <div class="pay-card-label">Custom / Other Payment</div>
+          <div class="pay-card-amount">Any Amount</div>
+          <p class="pay-card-desc">Directory advertising, event charges, AOA pass-through, or any other one-time payment.</p>
+          <div class="pay-custom-row">
+            <input type="number" id="input-custom" placeholder="Enter amount" min="1" />
+            <span>₹</span>
+          </div>
+          <input type="text" id="input-custom-desc" placeholder="Purpose (e.g. Directory Ad — Half Page)" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Barlow',sans-serif;font-size:13px;color:var(--text-primary);margin-bottom:12px;outline:none;background:var(--bg-light);" />
+          <button class="pay-btn pay-btn-green" onclick="openPayment('custom')">Pay Custom Amount</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Security strip -->
     <div class="pay-security fade-up">
-      <div class="pay-security-item">
-        <span>🔒</span> 256-bit SSL Secured
-      </div>
-      <div class="pay-security-item">
-        <span>🏦</span> Powered by Razorpay
-      </div>
-      <div class="pay-security-item">
-        <span>✅</span> All payments to RNEx Consultancy LLP
-      </div>
-      <div class="pay-security-item">
-        <span>📧</span> Receipt sent to your email
-      </div>
+      <div class="pay-security-item"><span>🔒</span> 256-bit SSL Secured</div>
+      <div class="pay-security-item"><span>🏦</span> Powered by Razorpay</div>
+      <div class="pay-security-item"><span>✅</span> All payments to RNEx Consultancy LLP</div>
+      <div class="pay-security-item"><span>📧</span> Receipt sent to your email</div>
+      <div class="pay-security-item"><span>🔄</span> Cancel subscriptions anytime</div>
     </div>
   </div>
 </section>
@@ -1527,111 +1561,146 @@ document.querySelectorAll('.legal-overlay').forEach(function(ov){
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   ✏️  PAYMENT CONFIG — EDIT THIS BLOCK TO CHANGE ANY AMOUNT
-   All amounts are in PAISE (multiply ₹ by 100)
-   Example: ₹10,000 = 1000000 paise
+   ✏️  PAYMENT CONFIG — EDIT THIS BLOCK ONLY
+   ═══════════════════════════════════════════════════════════════
+   SUBSCRIPTION PLAN IDs:
+   Create plans in Razorpay Dashboard → Subscriptions → Plans
+   Then paste the plan_XXXXXXXXXX IDs below.
+   Until plan IDs are added, subscription buttons open a
+   contact form instead (safe fallback).
    ═══════════════════════════════════════════════════════════════ */
-var RNEX_PAY_CONFIG = {
-  key:          'rzp_live_T6tayjjKL0N3J7',   // Razorpay Key ID
-  company:      'RNEx Consultancy LLP',        // Shown on payment popup
-  currency:     'INR',
-  theme:        '#1565C0',                     // RNEx blue
+var RNEX_CONFIG = {
+  key:            'rzp_live_T6tayjjKL0N3J7',
+  company:        'RNEx Consultancy LLP',
+  currency:       'INR',
+  theme:          '#1565C0',
+  logo:           '/logo.png',
+  contact:        '9015095151',
+  email:          'info@rnexconsultancy.com',
 
-  // ── FIXED FEES (in paise) ──────────────────────────────────
-  onboarding:   1000000,   // ₹10,000  — one-time onboarding fee
+  // ── ONE-TIME FEES (in paise) ──────────────────────────────
+  onboarding:     1000000,   // ₹10,000
 
-  // ── TIER DEFAULT AMOUNTS (in paise) ───────────────────────
-  // These are defaults shown on the cards.
-  // Client can override by typing in the input box.
-  starter:      1500000,   // ₹15,000  — starter monthly default
-  growth:       2500000,   // ₹25,000  — growth monthly default
-  premium:      6000000,   // ₹60,000  — premium monthly default
+  // ── SUBSCRIPTION PLAN IDs (from Razorpay Dashboard) ──────
+  // Go to: Razorpay Dashboard → Subscriptions → Plans → Create Plan
+  // Paste plan_XXXXXXXXXX IDs here after creating them
+  plans: {
+    starter:  '',    // e.g. 'plan_XXXXXXXXXX'
+    growth:   '',    // e.g. 'plan_XXXXXXXXXX'
+    premium:  '',    // e.g. 'plan_XXXXXXXXXX'
+  },
 
-  // ── TIER RANGE LABELS (display only) ─────────────────────
-  starterRange:  '₹15,000 – ₹25,000',
-  growthRange:   '₹25,000 – ₹40,000',
-  premiumRange:  '₹60,000+',
+  // ── TIER LABELS ───────────────────────────────────────────
+  tierNames: {
+    starter: 'Starter Tier — Monthly Retainer',
+    growth:  'Growth Tier — Monthly Retainer',
+    premium: 'Premium Tier — Monthly Retainer',
+  }
 };
 /* ═══════════════════════════════════════════════════════════════
-   END OF EDITABLE CONFIG — do not edit below this line
+   END CONFIG
    ═══════════════════════════════════════════════════════════════ */
 
-// Update displayed default amounts from config
-(function(){
-  function fmt(p){ return '₹'+((p/100).toLocaleString('en-IN')); }
-  var d=document.getElementById('disp-onboarding');
-  if(d) d.textContent=fmt(RNEX_PAY_CONFIG.onboarding);
-  var s=document.getElementById('disp-starter');
-  if(s) s.textContent=fmt(RNEX_PAY_CONFIG.starter);
-  var g=document.getElementById('disp-growth');
-  if(g) g.textContent=fmt(RNEX_PAY_CONFIG.growth);
-  var p=document.getElementById('disp-premium');
-  if(p) p.textContent=fmt(RNEX_PAY_CONFIG.premium);
-})();
+// Tab switcher
+function switchTab(tab) {
+  document.getElementById('tab-subscription').style.display = tab === 'subscription' ? 'block' : 'none';
+  document.getElementById('tab-onetime').style.display      = tab === 'onetime'      ? 'block' : 'none';
+  document.querySelectorAll('.pay-tab').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+}
 
-function openPayment(type) {
-  var amount, desc, name;
-  var cfg = RNEX_PAY_CONFIG;
+// ── SUBSCRIPTION FLOW ─────────────────────────────────────────
+function startSubscription(tier) {
+  var planId   = RNEX_CONFIG.plans[tier];
+  var tierName = RNEX_CONFIG.tierNames[tier];
 
-  if(type === 'onboarding') {
-    amount = cfg.onboarding;
-    name   = 'Onboarding Fee';
-    desc   = 'One-time non-refundable onboarding fee — RNEx Consultancy LLP';
-
-  } else if(type === 'starter') {
-    var inp = parseFloat(document.getElementById('input-starter').value);
-    if(!inp || inp < 1) { alert('Please enter the agreed retainer amount for the Starter tier.'); return; }
-    amount = Math.round(inp * 100);
-    name   = 'Starter Tier — Monthly Retainer';
-    desc   = 'Starter (Market Entry) monthly retainer — RNEx Consultancy LLP';
-
-  } else if(type === 'growth') {
-    var inp = parseFloat(document.getElementById('input-growth').value);
-    if(!inp || inp < 1) { alert('Please enter the agreed retainer amount for the Growth tier.'); return; }
-    amount = Math.round(inp * 100);
-    name   = 'Growth Tier — Monthly Retainer';
-    desc   = 'Growth (Active Expansion) monthly retainer — RNEx Consultancy LLP';
-
-  } else if(type === 'premium') {
-    var inp = parseFloat(document.getElementById('input-premium').value);
-    if(!inp || inp < 1) { alert('Please enter the agreed retainer amount for the Premium tier.'); return; }
-    amount = Math.round(inp * 100);
-    name   = 'Premium Tier — Monthly Retainer';
-    desc   = 'Premium (Full Presence) monthly retainer — RNEx Consultancy LLP';
-
-  } else if(type === 'custom') {
-    var inp = parseFloat(document.getElementById('input-custom').value);
-    var purpose = document.getElementById('input-custom-desc').value.trim();
-    if(!inp || inp < 1) { alert('Please enter the payment amount.'); return; }
-    if(!purpose) { alert('Please describe the purpose of this payment.'); return; }
-    amount = Math.round(inp * 100);
-    name   = 'Custom Payment';
-    desc   = purpose + ' — RNEx Consultancy LLP';
+  // Get amount entered by user
+  var inp = parseFloat(document.getElementById('sub-' + tier + '-amt').value);
+  if (!inp || inp < 1) {
+    alert('Please enter your agreed monthly retainer amount first.');
+    return;
   }
 
+  // If plan ID not yet configured → fallback to contact
+  if (!planId) {
+    var msg = 'To set up your ' + tierName + ' subscription for ₹' + inp.toLocaleString('en-IN') + '/month, '
+      + 'please contact us:\n\n'
+      + '📧 info@rnexconsultancy.com\n'
+      + '📞 +91 9015095151\n\n'
+      + 'We will set up your subscription and send you a payment link within 24 hours.';
+    alert(msg);
+    window.location.href = '#contact';
+    return;
+  }
+
+  // Open Razorpay Subscription checkout
   var options = {
-    key:         cfg.key,
-    amount:      amount,
-    currency:    cfg.currency,
-    name:        cfg.company,
-    description: desc,
-    image:       '/logo.png',
-    prefill:     { contact: '9015095151', email: 'info@rnexconsultancy.com' },
-    theme:       { color: cfg.theme },
-    modal:       { ondismiss: function(){ console.log('Payment dismissed'); } },
+    key:          RNEX_CONFIG.key,
+    subscription_id: planId,
+    name:         RNEX_CONFIG.company,
+    description:  tierName + ' · ₹' + inp.toLocaleString('en-IN') + '/month',
+    image:        RNEX_CONFIG.logo,
+    prefill: {
+      contact: RNEX_CONFIG.contact,
+      email:   RNEX_CONFIG.email,
+    },
+    theme:        { color: RNEX_CONFIG.theme },
     handler: function(response) {
-      // Payment successful
-      var msg = '✅ Payment Successful!\n\n'
-        + 'Payment ID: ' + response.razorpay_payment_id + '\n\n'
-        + 'Thank you! A confirmation will be sent to your email.\n'
-        + 'Please save your Payment ID for reference.';
+      var msg = '✅ Subscription Activated!\n\n'
+        + 'Subscription ID: ' + response.razorpay_subscription_id + '\n'
+        + 'Payment ID: '      + response.razorpay_payment_id + '\n\n'
+        + 'Your ' + tierName + ' will auto-renew monthly.\n'
+        + 'To cancel, email info@rnexconsultancy.com with your Subscription ID.\n\n'
+        + 'Please save these IDs for reference.';
       alert(msg);
     }
   };
 
   var rzp = new Razorpay(options);
-  rzp.on('payment.failed', function(resp){
-    alert('❌ Payment failed.\nReason: ' + resp.error.description + '\nPlease try again or contact info@rnexconsultancy.com');
+  rzp.on('payment.failed', function(resp) {
+    alert('❌ Payment failed: ' + resp.error.description + '\nContact info@rnexconsultancy.com');
+  });
+  rzp.open();
+}
+
+// ── ONE-TIME PAYMENT FLOW ─────────────────────────────────────
+function openPayment(type) {
+  var amount, desc;
+
+  if (type === 'onboarding') {
+    amount = RNEX_CONFIG.onboarding;
+    desc   = 'One-Time Onboarding Fee — RNEx Consultancy LLP';
+
+  } else if (type === 'custom') {
+    var inp     = parseFloat(document.getElementById('input-custom').value);
+    var purpose = document.getElementById('input-custom-desc').value.trim();
+    if (!inp || inp < 1) { alert('Please enter the payment amount.'); return; }
+    if (!purpose)        { alert('Please describe the purpose of this payment.'); return; }
+    amount = Math.round(inp * 100);
+    desc   = purpose + ' — RNEx Consultancy LLP';
+  }
+
+  var options = {
+    key:         RNEX_CONFIG.key,
+    amount:      amount,
+    currency:    RNEX_CONFIG.currency,
+    name:        RNEX_CONFIG.company,
+    description: desc,
+    image:       RNEX_CONFIG.logo,
+    prefill:     { contact: RNEX_CONFIG.contact, email: RNEX_CONFIG.email },
+    theme:       { color: RNEX_CONFIG.theme },
+    handler: function(response) {
+      var msg = '✅ Payment Successful!\n\n'
+        + 'Payment ID: ' + response.razorpay_payment_id + '\n\n'
+        + 'Thank you! Please save this Payment ID for reference.\n'
+        + 'A receipt will be sent to your email.';
+      alert(msg);
+    }
+  };
+
+  var rzp = new Razorpay(options);
+  rzp.on('payment.failed', function(resp) {
+    alert('❌ Payment failed: ' + resp.error.description + '\nContact info@rnexconsultancy.com');
   });
   rzp.open();
 }

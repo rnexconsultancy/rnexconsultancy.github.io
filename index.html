@@ -436,6 +436,30 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
 .pay-cancel-note{margin-top:24px;padding:14px 20px;background:var(--bg-light);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text-soft);line-height:1.6;}
 .pay-cancel-note a{color:var(--blue);font-weight:600;text-decoration:none;}
 
+/* THANK YOU MODAL */
+.ty-modal-overlay{display:none;position:fixed;inset:0;z-index:3000;background:rgba(13,27,62,.92);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;}
+.ty-modal-overlay.open{display:flex;}
+.ty-modal{background:#fff;border-radius:24px;padding:48px 40px;max-width:480px;width:100%;text-align:center;position:relative;box-shadow:0 32px 100px rgba(0,0,0,.4);}
+.ty-logo{width:80px;height:80px;margin:0 auto 20px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.2rem;}
+.ty-tick{width:72px;height:72px;margin:0 auto 20px;background:linear-gradient(135deg,#2e7d32,#43A047);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;animation:ty-pop .4s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes ty-pop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+.ty-brand{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.14em;margin-bottom:8px;}
+.ty-title{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:800;color:var(--charcoal);margin-bottom:8px;line-height:1.1;}
+.ty-subtitle{font-size:14px;color:var(--text-soft);margin-bottom:28px;line-height:1.6;}
+.ty-details{background:var(--bg-light);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:28px;text-align:left;}
+.ty-detail-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-soft);}
+.ty-detail-row:last-child{border-bottom:none;}
+.ty-detail-label{font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
+.ty-detail-value{font-size:13px;color:var(--charcoal);font-weight:700;text-align:right;max-width:60%;word-break:break-all;}
+.ty-actions{display:flex;flex-direction:column;gap:10px;}
+.ty-btn-primary{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.ty-btn-primary:hover{background:var(--blue-dark);}
+.ty-btn-secondary{width:100%;padding:11px;background:transparent;color:var(--blue);border:1.5px solid var(--border);border-radius:10px;font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.ty-btn-secondary:hover{border-color:var(--blue);background:var(--bg-light);}
+.ty-footer{margin-top:20px;font-size:11px;color:var(--text-muted);line-height:1.6;}
+.ty-footer a{color:var(--blue);text-decoration:none;font-weight:600;}
+@media(max-width:540px){.ty-modal{padding:32px 20px;}.ty-title{font-size:1.6rem;}}
+
 /* PAYMENT MODAL */
 .pay-modal-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(13,27,62,.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
 .pay-modal-overlay.open{display:flex;}
@@ -1583,6 +1607,25 @@ document.querySelectorAll('.legal-overlay').forEach(function(ov){
 
 </script>
 
+<!-- THANK YOU MODAL -->
+<div class="ty-modal-overlay" id="ty-modal-overlay">
+  <div class="ty-modal">
+    <div class="ty-tick" id="ty-icon">✅</div>
+    <div class="ty-brand">RNEx Consultancy LLP</div>
+    <h2 class="ty-title" id="ty-title">Payment Successful!</h2>
+    <p class="ty-subtitle" id="ty-subtitle">Thank you for your payment. Your invoice will be sent to your email shortly.</p>
+    <div class="ty-details" id="ty-details"></div>
+    <div class="ty-actions">
+      <button class="ty-btn-primary" onclick="closeTyModal()">Done ✓</button>
+      <button class="ty-btn-secondary" onclick="window.location.href='#contact'">Contact Us</button>
+    </div>
+    <div class="ty-footer">
+      Invoice will be emailed to you within minutes.<br/>
+      For support: <a href="mailto:info@rnexconsultancy.com">info@rnexconsultancy.com</a> · <a href="tel:+919015095151">+91 9015095151</a>
+    </div>
+  </div>
+</div>
+
 <!-- PAYMENT DETAILS MODAL -->
 <div class="pay-modal-overlay" id="pay-modal-overlay">
   <div class="pay-modal">
@@ -1658,6 +1701,40 @@ var RNEX_CONFIG = {
 /* ═══════════════════════════════════════════════════════════════
    END CONFIG
    ═══════════════════════════════════════════════════════════════ */
+
+// ── THANK YOU MODAL ──────────────────────────────────────────
+function showThankyou(title, subtitle, details, isSubscription) {
+  document.getElementById('ty-title').textContent    = title;
+  document.getElementById('ty-subtitle').textContent = subtitle;
+  document.getElementById('ty-icon').textContent     = isSubscription ? '🔄' : '✅';
+  document.getElementById('ty-icon').style.background = isSubscription
+    ? 'linear-gradient(135deg,var(--blue),var(--cyan))'
+    : 'linear-gradient(135deg,#2e7d32,#43A047)';
+
+  // Build details rows
+  var html = '';
+  details.forEach(function(row) {
+    html += '<div class="ty-detail-row">'
+      + '<span class="ty-detail-label">'+row.label+'</span>'
+      + '<span class="ty-detail-value">'+row.value+'</span>'
+      + '</div>';
+  });
+  document.getElementById('ty-details').innerHTML = html;
+
+  document.getElementById('ty-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTyModal() {
+  document.getElementById('ty-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('ty-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeTyModal();
+  });
+});
 
 // Current pending payment context
 var _pendingPayment = null;
@@ -1794,7 +1871,19 @@ async function proceedToPayment() {
         prefill:         { name:name, email:email, contact:mobile },
         theme:           { color:RNEX_CONFIG.theme },
         handler: function(r) {
-          alert('✅ Subscription Activated!\n\nSubscription ID: '+r.razorpay_subscription_id+'\nPayment ID: '+r.razorpay_payment_id+'\n\nAuto-renews monthly.\nInvoice will be sent to '+email+'\n\nTo cancel: email info@rnexconsultancy.com');
+          showThankyou(
+            'Subscription Activated! 🎉',
+            'Your monthly subscription is live. It will auto-renew on the same date every month.',
+            [
+              { label: 'Plan',            value: RNEX_CONFIG.tierNames[p.tier] + ' — Monthly' },
+              { label: 'Amount',          value: '₹' + p.amount.toLocaleString('en-IN') + ' / month' },
+              { label: 'Subscription ID', value: r.razorpay_subscription_id },
+              { label: 'Payment ID',      value: r.razorpay_payment_id },
+              { label: 'Invoice sent to', value: email },
+              { label: 'To cancel',       value: 'Email info@rnexconsultancy.com' },
+            ],
+            true
+          );
         }
       };
       var rzp = new Razorpay(options);
@@ -1817,7 +1906,18 @@ async function proceedToPayment() {
         notes:       { customer_name:name, business:business, address:address },
         theme:       { color:RNEX_CONFIG.theme },
         handler: function(r) {
-          alert('✅ Payment Successful!\n\nPayment ID: '+r.razorpay_payment_id+'\nInvoice will be sent to '+email+'\n\nPlease save this ID.');
+          showThankyou(
+            'Payment Successful! 🎉',
+            'Thank you for your payment to RNEx Consultancy LLP. Your invoice will be emailed shortly.',
+            [
+              { label: 'Description', value: p.desc },
+              { label: 'Amount',      value: '₹' + p.amount.toLocaleString('en-IN') },
+              { label: 'Payment ID',  value: r.razorpay_payment_id },
+              { label: 'Invoice to',  value: email },
+              { label: 'Name',        value: name },
+            ],
+            false
+          );
         }
       };
       var rzp = new Razorpay(options);
@@ -1825,7 +1925,17 @@ async function proceedToPayment() {
       rzp.open();
     }
   } catch(err) {
-    alert('❌ Error: '+err.message+'\nContact info@rnexconsultancy.com or +91 9015095151');
+    showThankyou(
+      'Something went wrong',
+      err.message || 'Please try again or contact us directly.',
+      [
+        { label: 'Email',  value: 'info@rnexconsultancy.com' },
+        { label: 'Phone',  value: '+91 9015095151' },
+      ],
+      false
+    );
+    document.getElementById('ty-icon').textContent = '❌';
+    document.getElementById('ty-icon').style.background = 'linear-gradient(135deg,#c62828,#e53935)';
     btn.disabled = false;
     btn.textContent = 'Proceed to Payment →';
   }

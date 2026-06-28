@@ -1562,146 +1562,99 @@ document.querySelectorAll('.legal-overlay').forEach(function(ov){
 <script>
 /* ═══════════════════════════════════════════════════════════════
    ✏️  PAYMENT CONFIG — EDIT THIS BLOCK ONLY
-   ═══════════════════════════════════════════════════════════════
-   SUBSCRIPTION PLAN IDs:
-   Create plans in Razorpay Dashboard → Subscriptions → Plans
-   Then paste the plan_XXXXXXXXXX IDs below.
-   Until plan IDs are added, subscription buttons open a
-   contact form instead (safe fallback).
    ═══════════════════════════════════════════════════════════════ */
 var RNEX_CONFIG = {
-  key:            'rzp_live_T6tayjjKL0N3J7',
-  company:        'RNEx Consultancy LLP',
-  currency:       'INR',
-  theme:          '#1565C0',
-  logo:           '/logo.png',
-  contact:        '9015095151',
-  email:          'info@rnexconsultancy.com',
-
-  // ── ONE-TIME FEES (in paise) ──────────────────────────────
-  onboarding:     1000000,   // ₹10,000
-
-  // ── SUBSCRIPTION PLAN IDs (from Razorpay Dashboard) ──────
-  // Go to: Razorpay Dashboard → Subscriptions → Plans → Create Plan
-  // Paste plan_XXXXXXXXXX IDs here after creating them
-  plans: {
-    starter:  '',    // e.g. 'plan_XXXXXXXXXX'
-    growth:   '',    // e.g. 'plan_XXXXXXXXXX'
-    premium:  '',    // e.g. 'plan_XXXXXXXXXX'
-  },
-
-  // ── TIER LABELS ───────────────────────────────────────────
+  key:        'rzp_live_T6x2P8kIV7Mx0G',
+  company:    'RNEx Consultancy LLP',
+  currency:   'INR',
+  theme:      '#1565C0',
+  logo:       '/logo.png',
+  contact:    '9015095151',
+  email:      'info@rnexconsultancy.com',
+  serverUrl:  'https://rnex-payment-server.onrender.com',
+  onboarding: 1000000,
   tierNames: {
-    starter: 'Starter Tier — Monthly Retainer',
-    growth:  'Growth Tier — Monthly Retainer',
-    premium: 'Premium Tier — Monthly Retainer',
+    starter: 'Starter Tier',
+    growth:  'Growth Tier',
+    premium: 'Premium Tier',
   }
 };
 /* ═══════════════════════════════════════════════════════════════
    END CONFIG
    ═══════════════════════════════════════════════════════════════ */
 
-// Tab switcher
 function switchTab(tab) {
-  document.getElementById('tab-subscription').style.display = tab === 'subscription' ? 'block' : 'none';
-  document.getElementById('tab-onetime').style.display      = tab === 'onetime'      ? 'block' : 'none';
-  document.querySelectorAll('.pay-tab').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('tab-subscription').style.display = tab==='subscription'?'block':'none';
+  document.getElementById('tab-onetime').style.display      = tab==='onetime'?'block':'none';
+  document.querySelectorAll('.pay-tab').forEach(function(b){b.classList.remove('active');});
   event.target.classList.add('active');
 }
 
-// ── SUBSCRIPTION FLOW ─────────────────────────────────────────
-function startSubscription(tier) {
-  var planId   = RNEX_CONFIG.plans[tier];
+async function startSubscription(tier) {
   var tierName = RNEX_CONFIG.tierNames[tier];
-
-  // Get amount entered by user
-  var inp = parseFloat(document.getElementById('sub-' + tier + '-amt').value);
-  if (!inp || inp < 1) {
-    alert('Please enter your agreed monthly retainer amount first.');
-    return;
+  var inp = parseFloat(document.getElementById('sub-'+tier+'-amt').value);
+  if (!inp||inp<1){alert('Please enter your agreed monthly retainer amount first.');return;}
+  var ranges={starter:[15000,25000],growth:[25000,40000],premium:[60000,999999]};
+  if(ranges[tier]&&(inp<ranges[tier][0]||inp>ranges[tier][1])){
+    alert('Amount ₹'+inp.toLocaleString('en-IN')+' is outside the '+tierName+' range.');return;
   }
-
-  // If plan ID not yet configured → fallback to contact
-  if (!planId) {
-    var msg = 'To set up your ' + tierName + ' subscription for ₹' + inp.toLocaleString('en-IN') + '/month, '
-      + 'please contact us:\n\n'
-      + '📧 info@rnexconsultancy.com\n'
-      + '📞 +91 9015095151\n\n'
-      + 'We will set up your subscription and send you a payment link within 24 hours.';
-    alert(msg);
-    window.location.href = '#contact';
-    return;
+  var email=prompt('Please enter your email address:');
+  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+  var name=prompt('Your full name:')||email;
+  var btn=event.target;
+  btn.textContent='Setting up…';btn.disabled=true;
+  try {
+    var res=await fetch(RNEX_CONFIG.serverUrl+'/create-subscription',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({tier,amount:inp,name,email})
+    });
+    var data=await res.json();
+    if(!data.success)throw new Error(data.error||'Server error');
+    var options={
+      key:RNEX_CONFIG.key,
+      subscription_id:data.subscription_id,
+      name:RNEX_CONFIG.company,
+      description:tierName+' · ₹'+inp.toLocaleString('en-IN')+'/month',
+      image:RNEX_CONFIG.logo,
+      prefill:{name:name,email:email,contact:RNEX_CONFIG.contact},
+      theme:{color:RNEX_CONFIG.theme},
+      handler:function(r){
+        alert('✅ Subscription Activated!\n\nSubscription ID: '+r.razorpay_subscription_id+'\nPayment ID: '+r.razorpay_payment_id+'\n\nAuto-renews monthly. To cancel email info@rnexconsultancy.com');
+      }
+    };
+    var rzp=new Razorpay(options);
+    rzp.on('payment.failed',function(r){alert('❌ Failed: '+r.error.description);});
+    rzp.open();
+  } catch(err){
+    alert('❌ Error: '+err.message+'\nContact info@rnexconsultancy.com or +91 9015095151');
+  } finally {
+    btn.textContent='Subscribe — '+tierName.split(' ')[0]+' ↗';btn.disabled=false;
   }
-
-  // Open Razorpay Subscription checkout
-  var options = {
-    key:          RNEX_CONFIG.key,
-    subscription_id: planId,
-    name:         RNEX_CONFIG.company,
-    description:  tierName + ' · ₹' + inp.toLocaleString('en-IN') + '/month',
-    image:        RNEX_CONFIG.logo,
-    prefill: {
-      contact: RNEX_CONFIG.contact,
-      email:   RNEX_CONFIG.email,
-    },
-    theme:        { color: RNEX_CONFIG.theme },
-    handler: function(response) {
-      var msg = '✅ Subscription Activated!\n\n'
-        + 'Subscription ID: ' + response.razorpay_subscription_id + '\n'
-        + 'Payment ID: '      + response.razorpay_payment_id + '\n\n'
-        + 'Your ' + tierName + ' will auto-renew monthly.\n'
-        + 'To cancel, email info@rnexconsultancy.com with your Subscription ID.\n\n'
-        + 'Please save these IDs for reference.';
-      alert(msg);
-    }
-  };
-
-  var rzp = new Razorpay(options);
-  rzp.on('payment.failed', function(resp) {
-    alert('❌ Payment failed: ' + resp.error.description + '\nContact info@rnexconsultancy.com');
-  });
-  rzp.open();
 }
 
-// ── ONE-TIME PAYMENT FLOW ─────────────────────────────────────
 function openPayment(type) {
-  var amount, desc;
-
-  if (type === 'onboarding') {
-    amount = RNEX_CONFIG.onboarding;
-    desc   = 'One-Time Onboarding Fee — RNEx Consultancy LLP';
-
-  } else if (type === 'custom') {
-    var inp     = parseFloat(document.getElementById('input-custom').value);
-    var purpose = document.getElementById('input-custom-desc').value.trim();
-    if (!inp || inp < 1) { alert('Please enter the payment amount.'); return; }
-    if (!purpose)        { alert('Please describe the purpose of this payment.'); return; }
-    amount = Math.round(inp * 100);
-    desc   = purpose + ' — RNEx Consultancy LLP';
+  var amount,desc;
+  if(type==='onboarding'){
+    amount=RNEX_CONFIG.onboarding;
+    desc='One-Time Onboarding Fee — RNEx Consultancy LLP';
+  } else if(type==='custom'){
+    var inp=parseFloat(document.getElementById('input-custom').value);
+    var purpose=document.getElementById('input-custom-desc').value.trim();
+    if(!inp||inp<1){alert('Please enter the payment amount.');return;}
+    if(!purpose){alert('Please describe the purpose.');return;}
+    amount=Math.round(inp*100);
+    desc=purpose+' — RNEx Consultancy LLP';
   }
-
-  var options = {
-    key:         RNEX_CONFIG.key,
-    amount:      amount,
-    currency:    RNEX_CONFIG.currency,
-    name:        RNEX_CONFIG.company,
-    description: desc,
-    image:       RNEX_CONFIG.logo,
-    prefill:     { contact: RNEX_CONFIG.contact, email: RNEX_CONFIG.email },
-    theme:       { color: RNEX_CONFIG.theme },
-    handler: function(response) {
-      var msg = '✅ Payment Successful!\n\n'
-        + 'Payment ID: ' + response.razorpay_payment_id + '\n\n'
-        + 'Thank you! Please save this Payment ID for reference.\n'
-        + 'A receipt will be sent to your email.';
-      alert(msg);
-    }
+  var options={
+    key:RNEX_CONFIG.key,amount:amount,currency:RNEX_CONFIG.currency,
+    name:RNEX_CONFIG.company,description:desc,image:RNEX_CONFIG.logo,
+    prefill:{contact:RNEX_CONFIG.contact,email:RNEX_CONFIG.email},
+    theme:{color:RNEX_CONFIG.theme},
+    handler:function(r){alert('✅ Payment Successful!\n\nPayment ID: '+r.razorpay_payment_id+'\n\nPlease save this ID.');}
   };
-
-  var rzp = new Razorpay(options);
-  rzp.on('payment.failed', function(resp) {
-    alert('❌ Payment failed: ' + resp.error.description + '\nContact info@rnexconsultancy.com');
-  });
+  var rzp=new Razorpay(options);
+  rzp.on('payment.failed',function(r){alert('❌ Failed: '+r.error.description);});
   rzp.open();
 }
 </script>

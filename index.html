@@ -155,14 +155,16 @@
   position: relative;
   width: 100%;
   display: block;
+  padding-top: 72px;
+  box-sizing: border-box;
 }
 
 .hero-wrap {
   position: relative;
   width: 100%;
-  height: calc(100vh - 72px);
-  min-height: 520px;
-  margin-top: 72px;
+  height: 100vh;
+  min-height: 560px;
+  padding-top: 0;
   overflow: hidden;
   background: #0a1628;
   display: block;
@@ -313,7 +315,12 @@
 
 /* ── MOBILE ─────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero-wrap { height: 100svh; min-height: 520px; }
+  .hero-wrap { height: calc(100svh - 72px); min-height: 480px; }
+  /* Per-slide optimal crop for mobile portrait view */
+  .hs-slide:nth-child(1) { background-position: center 30%; }
+  .hs-slide:nth-child(2) { background-position: center 40%; }
+  .hs-slide:nth-child(3) { background-position: center 35%; }
+  .hs-slide:nth-child(4) { background-position: center 45%; }
   .hs-text { bottom: 46px; padding: 0 18px; max-width: 100%; }
   .hs-eyebrow { font-size: 10px; padding: 4px 10px; margin-bottom: 8px; }
   .hs-title { font-size: clamp(1.65rem, 6vw, 2.1rem); }

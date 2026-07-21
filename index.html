@@ -56,19 +56,12 @@
   :root { color-scheme: dark; }
 
 /* ── HERO SLIDESHOW ──────────────────────────────────────────── */
-/* ══ HERO: photo-first full-screen slideshow ══ */
-#hero{position:relative;width:100%;overflow:hidden;background:#0a1628;}
 
 /* Photo fills full viewport height */
-.hero-slideshow{position:relative;width:100%;height:100vh;min-height:560px;}
-@media(max-width:768px){.hero-slideshow{height:100svh;min-height:500px;}}
 
 /* Slides fill the whole slideshow area */
-.hs-slide{position:absolute;inset:0;background-size:cover;background-position:center center;opacity:0;transition:opacity 1s ease;z-index:1;}
-.hs-slide.active{opacity:1;z-index:2;}
 
 /* Overlay: ONLY bottom 40% darkened — photo visible in top 60% */
-.hs-overlay{position:absolute;inset:0;z-index:3;
   background:linear-gradient(
     to bottom,
     rgba(0,0,0,0) 0%,
@@ -78,76 +71,36 @@
   );}
 
 /* Text block: pinned to BOTTOM of slideshow */
-.hs-center{position:absolute;bottom:80px;left:0;right:0;z-index:4;
   padding:0 48px;max-width:1200px;margin:0 auto;}
-@media(min-width:769px){.hs-center{left:50%;transform:translateX(-50%);width:100%;}}
 
-.hs-eyebrow{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;
   letter-spacing:.14em;color:var(--cyan);margin-bottom:10px;
   background:rgba(91,184,232,.15);border:1px solid rgba(91,184,232,.35);
   padding:5px 12px;border-radius:100px;}
-.hs-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
   font-weight:800;color:#fff;line-height:1.05;margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.5);}
-.hs-title span{color:var(--cyan);}
-.hs-sub{font-size:15px;color:rgba(255,255,255,.82);line-height:1.6;
   max-width:520px;margin-bottom:20px;text-shadow:0 1px 6px rgba(0,0,0,.6);}
-.hs-actions{display:flex;gap:10px;flex-wrap:wrap;}
-.hs-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);
   color:#fff;padding:12px 24px;border-radius:8px;font-weight:700;font-size:14px;
   text-decoration:none;transition:all .2s;border:none;cursor:pointer;}
-.hs-btn-primary:hover{background:var(--cyan);transform:translateY(-2px);}
-.hs-btn-outline{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);
   backdrop-filter:blur(4px);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;
   font-size:14px;border:1.5px solid rgba(255,255,255,.35);text-decoration:none;transition:all .2s;}
-.hs-btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.18);}
 
 /* Arrows */
-.hs-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;
   background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
   color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;
   display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
-.hs-arrow:hover{background:rgba(255,255,255,.3);}
-.hs-prev{left:16px;}
-.hs-next{right:16px;}
 
 /* Dots */
-.hs-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
   z-index:6;display:flex;gap:6px;align-items:center;}
-.hs-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);
   border:none;cursor:pointer;transition:all .25s;padding:0;}
-.hs-dot.active{background:var(--cyan);width:22px;border-radius:3px;}
 
 /* Location caption — bottom-left corner above dots */
-.hs-slide-info{display:none;}
-.hs-slide.active .hs-slide-info{display:none;}
 
 /* Stats bar — solid dark strip BELOW the photo */
-.hs-stats-bar{background:rgba(8,15,30,.95);border-top:1px solid rgba(255,255,255,.08);padding:0 24px;}
-.hs-stats-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;
   justify-content:center;gap:0;}
-.hs-stat{padding:14px 28px;text-align:center;}
-.hs-stat-num{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:800;
   color:var(--cyan);line-height:1;}
-.hs-stat-label{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;
   letter-spacing:.08em;margin-top:2px;}
-.hs-stat-divider{width:1px;height:36px;background:rgba(255,255,255,.1);}
-.hs-brand-bar{display:none;}
-.hs-claim{display:none;}
 
-/* ── MOBILE ── */
 @media(max-width:768px){
-  .hs-center{bottom:60px;padding:0 18px;}
-  .hs-eyebrow{font-size:10px;padding:4px 10px;margin-bottom:8px;}
-  .hs-title{font-size:clamp(1.6rem,6.5vw,2.2rem);margin-bottom:8px;}
-  .hs-sub{font-size:13px;margin-bottom:16px;max-width:100%;}
-  .hs-actions{gap:8px;flex-direction:column;width:100%;}
-  .hs-btn-primary,.hs-btn-outline{padding:12px 18px;font-size:13px;
     justify-content:center;width:100%;box-sizing:border-box;}
-  .hs-arrow{width:34px;height:34px;font-size:18px;opacity:.7;}
-  .hs-stat{padding:10px 14px;}
-  .hs-stat-num{font-size:1.2rem;}
-  .hs-stat-label{font-size:9px;}
-  .hs-stat-divider{display:none;}
 }
 
 
@@ -189,6 +142,50 @@
 .lightbox-counter{color:rgba(255,255,255,.5);font-size:12px;margin-top:8px;}
 @media(max-width:768px){.gallery-grid{grid-template-columns:1fr 1fr;}.lightbox-prev{left:4px;}.lightbox-next{right:4px;}}
 @media(max-width:480px){.gallery-grid{grid-template-columns:1fr 1fr;}}
+
+/* ══ HERO ══ */
+#hero{position:relative;width:100%;}
+.hero-wrap{position:relative;width:100%;height:100vh;min-height:560px;overflow:hidden;background:#0a1628;}
+.hs-slide{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center center;opacity:0;transition:opacity 1s ease;z-index:1;}
+.hs-slide.active{opacity:1;z-index:2;}
+.hs-overlay{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,transparent 42%,rgba(8,15,30,.5) 65%,rgba(8,15,30,.93) 100%);}
+.hs-text{position:absolute;bottom:52px;left:0;right:0;z-index:4;padding:0 48px;max-width:780px;}
+.hs-eyebrow{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--cyan);background:rgba(91,184,232,.15);border:1px solid rgba(91,184,232,.3);padding:5px 13px;border-radius:100px;margin-bottom:12px;}
+.hs-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:#fff;line-height:1.05;margin-bottom:10px;text-shadow:0 2px 16px rgba(0,0,0,.6);}
+.hs-title span{color:var(--cyan);}
+.hs-sub{font-size:15px;color:rgba(255,255,255,.82);line-height:1.6;margin-bottom:20px;max-width:500px;text-shadow:0 1px 8px rgba(0,0,0,.5);}
+.hs-actions{display:flex;gap:12px;flex-wrap:nowrap;}
+.hs-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:12px 26px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .2s;white-space:nowrap;}
+.hs-btn-primary:hover{background:var(--cyan);transform:translateY(-2px);}
+.hs-btn-outline{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:#fff;padding:12px 26px;border-radius:8px;font-weight:600;font-size:14px;border:1.5px solid rgba(255,255,255,.4);text-decoration:none;transition:background .2s,border-color .2s;white-space:nowrap;}
+.hs-btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.2);}
+.hs-prev,.hs-next{position:absolute;top:50%;transform:translateY(-50%);z-index:6;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;width:42px;height:42px;border-radius:50%;font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;padding:0;line-height:1;}
+.hs-prev:hover,.hs-next:hover{background:rgba(255,255,255,.3);}
+.hs-prev{left:16px;}.hs-next{right:16px;}
+.hs-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:7px;align-items:center;}
+.hs-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);border:none;cursor:pointer;padding:0;transition:all .25s;}
+.hs-dot.active{background:var(--cyan);width:24px;border-radius:4px;}
+.hs-stats-bar{background:#080f1e;border-top:1px solid rgba(255,255,255,.07);padding:0 24px;}
+.hs-stats-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:center;}
+.hs-stat{padding:16px 28px;text-align:center;}
+.hs-stat-num{font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:800;color:var(--cyan);line-height:1;}
+.hs-stat-label{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;}
+.hs-stat-div{width:1px;height:36px;background:rgba(255,255,255,.1);}
+@media(max-width:768px){
+  .hero-wrap{height:100svh;min-height:500px;}
+  .hs-text{bottom:44px;padding:0 18px;max-width:100%;}
+  .hs-title{font-size:clamp(1.7rem,6.5vw,2.2rem);margin-bottom:8px;}
+  .hs-sub{font-size:13px;margin-bottom:14px;}
+  .hs-actions{gap:8px;}
+  .hs-btn-primary,.hs-btn-outline{padding:11px 16px;font-size:13px;}
+  .hs-prev{left:8px;}.hs-next{right:8px;}
+  .hs-prev,.hs-next{width:34px;height:34px;font-size:20px;}
+  .hs-stat{padding:12px 10px;}
+  .hs-stat-num{font-size:1.1rem;}
+  .hs-stat-label{font-size:9px;}
+  .hs-stat-div{display:none;}
+}
+/* ══ END HERO ══ */
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1101,33 +1098,26 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
   </div>
 </header>
 
-<!-- HERO — PHOTO SLIDESHOW FIRST -->
+<!-- HERO -->
 <section id="hero">
-  <!-- FULL SCREEN SLIDESHOW -->
-  <div class="hero-slideshow">
-
-    <!-- 5 Slides — full photo, no text inside -->
+  <div class="hero-wrap">
     <div class="hs-slide active" style="background-image:url(slide1.jpg)"></div>
     <div class="hs-slide" style="background-image:url(slide2.jpg)"></div>
     <div class="hs-slide" style="background-image:url(slide3.jpg)"></div>
     <div class="hs-slide" style="background-image:url(slide4.jpg)"></div>
     <div class="hs-slide" style="background-image:url(slide5.jpg)"></div>
-
-    <!-- Bottom gradient + text overlay -->
     <div class="hs-overlay"></div>
-
-    <!-- Text: bottom-pinned inside photo area -->
-    <div class="hs-center">
+    <div class="hs-text">
       <div class="hs-eyebrow">On-Ground Community Activation · Live Photos</div>
-      <h1 class="hs-title">Raj Nagar Extension's #1<br/><span>Hyperlocal Marketing Agency</span></h1>
+      <h1 class="hs-title">Raj Nagar Extension's #1<br><span>Hyperlocal Marketing Agency</span></h1>
       <p class="hs-sub">Reach 250,000+ residents across 90+ apartment societies — through trusted community engagement.</p>
       <div class="hs-actions">
-        <a href="#contact" class="hs-btn-primary">Start a Conversation →</a>
-        <a href="#services" class="hs-btn-outline">See How It Works ↓</a>
+        <a href="#contact" class="hs-btn-primary">Start a Conversation &#8594;</a>
+        <a href="#services" class="hs-btn-outline">See How It Works &#8595;</a>
       </div>
     </div>
-
-    <!-- Dots navigation -->
+    <button class="hs-prev" onclick="moveSlide(-1)">&#8249;</button>
+    <button class="hs-next" onclick="moveSlide(1)">&#8250;</button>
     <div class="hs-dots">
       <button class="hs-dot active" onclick="goSlide(0)"></button>
       <button class="hs-dot" onclick="goSlide(1)"></button>
@@ -1135,27 +1125,20 @@ footer{background:var(--bg-dark);padding:72px 5% 0}
       <button class="hs-dot" onclick="goSlide(3)"></button>
       <button class="hs-dot" onclick="goSlide(4)"></button>
     </div>
-
-    <!-- Arrows -->
-    <button class="hs-arrow hs-prev" onclick="moveSlide(-1)">&#8249;</button>
-    <button class="hs-arrow hs-next" onclick="moveSlide(1)">&#8250;</button>
-  </div><!-- /hero-slideshow -->
-
-  <!-- Stats bar — BELOW the photo, always visible -->
+  </div>
   <div class="hs-stats-bar">
     <div class="hs-stats-inner">
       <div class="hs-stat"><div class="hs-stat-num">250K+</div><div class="hs-stat-label">Residents</div></div>
-      <div class="hs-stat-divider"></div>
+      <div class="hs-stat-div"></div>
       <div class="hs-stat"><div class="hs-stat-num">90+</div><div class="hs-stat-label">Societies</div></div>
-      <div class="hs-stat-divider"></div>
+      <div class="hs-stat-div"></div>
       <div class="hs-stat"><div class="hs-stat-num">40K+</div><div class="hs-stat-label">Direct Contacts</div></div>
-      <div class="hs-stat-divider"></div>
+      <div class="hs-stat-div"></div>
       <div class="hs-stat"><div class="hs-stat-num">4+</div><div class="hs-stat-label">Years Active</div></div>
-      <div class="hs-stat-divider"></div>
+      <div class="hs-stat-div"></div>
       <div class="hs-stat"><div class="hs-stat-num">100+</div><div class="hs-stat-label">Community Groups</div></div>
     </div>
   </div>
-
 </section>
 
 <script>

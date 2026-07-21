@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.rnexconsultancy.com/sitemap.xml
+
+# Prioritise Google crawling
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Block AI training crawlers (optional protection)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
